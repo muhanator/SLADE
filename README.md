@@ -7,7 +7,7 @@ SOME BASIC GIT RULES (I recommend that you download Git Bash):
 To Clone this repo:
 1) click on the "clone or download" button and copy the link
 2) go into the workspace that you want to work in eg: Desktop/project/personal
-3) type 'git clone <INSERT LINK>' and voila
+3) type 'git clone <INSERT LINK>' and voila!
 
 When working on an issue:
 * NO ONE WILL WORK ON MASTER OR COMMIT DIRECTLY TO MASTER
