@@ -32,5 +32,6 @@ TEAM MEMBERS:
 
 - Muhammad Saad Mujtaba, @muhanator# SLADE
 - Michael Lee, @mlee97
+- Jeremy Davis, @jeremy-davis-mcgill
 
 SLADE is the 1 stop schedule maker allowing you to shedule and do everything you want in a day exactly as you want it
