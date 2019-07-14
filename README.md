@@ -19,9 +19,13 @@ $ git checkout -b TASK-20-Description-about-your-task master
 2) when making and committing changes:
 
 $ git status (shows you what changes you have made)
+
 $ git add . (adds all the files you modified)
+
 $ git commit -m "TASK-20: Write a description about the change you made"
+
 $git push (to push your local changes to github)
+
 
 3) Making a PR
 - After you have committed a change, you have to go onto Github and create a Pull Request and assign someone to review the PR for you
