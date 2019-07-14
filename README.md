@@ -30,7 +30,7 @@ $git push (to push your local changes to github)
 
 TEAM MEMBERS:
 
-- Muhammad Saad Mujtaba, @muhanator# SLADE is garbage
+- Muhammad Saad Mujtaba, @muhanator# SLADE
 - Michael Lee, @mlee97
 - Jeremy Davis, @jeremy-davis-mcgill
 - Armando Mancino, @mandocino
