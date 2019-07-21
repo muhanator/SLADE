@@ -9,14 +9,29 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-    <include layout="@layout/calendar_content"/>
+    <include layout="@layout/task_creation_content"/>
 
+
+    <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="416dp"
+            android:layout_height="558dp"
+
+            tools:visibility="invisible" android:visibility="invisible"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" android:paddingRight="10dp" android:paddingBottom="10dp"
+            app:layout_constrainedHeight="true" app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="108dp"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:scaleX="1" android:scaleY="1"/>
 
     <include
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:clipToPadding="false"
     />
+
 
 
     <com.google.android.material.navigation.NavigationView

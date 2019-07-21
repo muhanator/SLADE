@@ -14,6 +14,14 @@ import android.view.Menu
 import android.widget.CalendarView
 import android.widget.Toast
 import android.content.Intent
+import java.util.Calendar
+
+import android.widget.TextView
+
+import java.text.DateFormat
+
+
+
 
 
 
@@ -33,6 +41,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
         }
 
+        val calendar = Calendar.getInstance()
+        val currentDate = DateFormat.getDateInstance().format(calendar.time)
+        val textViewDate = findViewById<TextView>(R.id.date_text)
+        textViewDate.setText(currentDate)
+
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -41,6 +54,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+
+            intent = Intent(this, TaskCreateActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)

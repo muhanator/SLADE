@@ -6,13 +6,28 @@
                                                    android:layout_height="match_parent" android:id="@+id/linearLayout">
 
     <TextView
-            android:text="@string/Home"
+            android:text="@string/today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:textSize="32sp" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="162dp"
-            android:layout_marginStart="162dp" android:layout_marginEnd="163dp" android:layout_marginRight="163dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="344dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="344dp"/>
+            android:id="@+id/date_text"
+            android:textSize="32sp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="70dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="161dp" android:layout_marginStart="161dp" android:layout_marginEnd="162dp"
+            android:layout_marginRight="162dp" app:layout_constraintEnd_toEndOf="parent"/>
+
+    <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="416dp"
+            android:layout_height="558dp"
+
+            tools:visibility="invisible" android:visibility="invisible"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" android:paddingRight="10dp" android:paddingBottom="10dp"
+            app:layout_constrainedHeight="true" app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="108dp"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:scaleX="1" android:scaleY="1"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

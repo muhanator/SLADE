@@ -15,20 +15,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
-class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendar)
+        setContentView(R.layout.task_creation)
 
-
-        //Below, we have access to inputs that occur on the calendar
-        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-            Toast.makeText(this@CalendarActivity, msg, Toast.LENGTH_SHORT).show()
-        }
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -38,15 +31,13 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-
-            intent = Intent(this, TaskCreateActivity::class.java)
-            startActivity(intent)
-            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+
+
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
