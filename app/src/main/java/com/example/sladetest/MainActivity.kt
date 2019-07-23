@@ -15,6 +15,7 @@ import android.widget.CalendarView
 import android.widget.Toast
 import android.content.Intent
 import java.util.Calendar
+import android.widget.ProgressBar;
 
 import android.widget.TextView
 
@@ -45,6 +46,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val currentDate = DateFormat.getDateInstance().format(calendar.time)
         val textViewDate = findViewById<TextView>(R.id.date_text)
         textViewDate.setText(currentDate)
+
+
+        //Below, we initialize the progress bar
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
+        progressBar.setProgress(50);
+        progressBar.setMax(100);
+
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)

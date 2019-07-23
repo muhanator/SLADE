@@ -18,4 +18,6 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="surrounds_the_date_on_the_today_page">Surrounds the date on the today page</string>
+    <string name="today_s_progress">Today\'s Progress</string>
 </resources>

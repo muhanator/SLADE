@@ -9,7 +9,8 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-
+    <include
+            layout = "@layout/home_content"/>
 
     <include
             layout="@layout/app_bar_main"
@@ -17,8 +18,7 @@
             android:layout_height="match_parent" android:clipToPadding="false"
     />
 
-    <include
-        layout = "@layout/home_content"/>
+
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"

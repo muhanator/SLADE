@@ -8,10 +8,28 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
         tools:context=".MainActivity">
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/title_rect" android:id="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="70dp"
+            android:contentDescription="@string/surrounds_the_date_on_the_today_page"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="105dp"
+            android:layout_marginStart="105dp" android:layout_marginEnd="106dp" android:layout_marginRight="106dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
+    <ImageView
+            android:layout_width="350dp"
+            android:layout_height="300dp" app:srcCompat="@drawable/basic_rectangle" android:id="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="130dp"
+            android:contentDescription="@string/surrounds_the_date_on_the_today_page"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" android:layout_marginEnd="50dp" android:layout_marginRight="50dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
     <CalendarView
             android:id="@+id/calendarView"
-            android:layout_width="416dp"
+            android:layout_width="430dp"
             android:layout_height="558dp"
 
             tools:visibility="visible" android:visibility="visible"
@@ -21,7 +39,9 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="108dp"
             app:layout_constraintStart_toStartOf="parent"
 
-            android:scaleX="1" android:scaleY="1"/>
+            android:scaleX="1" android:scaleY="1" android:background="#00FFFFFF" android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="10dp" android:layout_marginEnd="10dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
