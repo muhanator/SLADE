@@ -34,7 +34,8 @@
                         android:layout_height="match_parent"
                         android:showDividers="middle|beginning|end" android:paddingLeft="20dp"
                         android:paddingRight="20dp"
-                >
+                        android:stretchColumns="*"
+                        android:shrinkColumns="*">
 
                     <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp">
 
@@ -44,7 +45,6 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/date_text"
                                 android:textSize="32sp"
-
                                 android:layout_marginEnd="162dp"
                                 android:layout_marginRight="120dp"
                                 android:textColor="@color/white" android:gravity="start"/>
@@ -76,30 +76,36 @@
 
                     </TableRow>
 
-                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                    <TableRow android:layout_width="169dp" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
+
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
-                                android:text="12 AM"
-                                android:layout_width="50dp"
-                                android:layout_height="wrap_content" android:id="@+id/textView2"/>
+                                android:text="@string/time_12_AM"
+                                android:layout_width="67dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="start"
+                                android:gravity="end"
+                                android:id="@+id/textView2"/>
+
+
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
-                                android:layout_width="50dp"
+                                android:layout_width="293dp"
                                 android:layout_height="20dp"
                                 android:id="@+id/textView3"
                                 android:text="1 AM"/>
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -109,7 +115,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -119,7 +125,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -129,7 +135,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -139,7 +145,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -149,7 +155,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -159,7 +165,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -169,7 +175,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -179,7 +185,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -189,7 +195,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -199,7 +205,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -209,7 +215,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -219,7 +225,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -229,7 +235,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -239,7 +245,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -249,7 +255,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -259,7 +265,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -269,7 +275,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -279,7 +285,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -289,7 +295,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -299,7 +305,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -309,7 +315,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -319,7 +325,7 @@
                     </TableRow>
                     <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                               android:background="@drawable/table_border"
-                              android:minHeight="40dp">
+                              android:minHeight="80dp">
                         <TextView
                                 android:paddingLeft="5dp"
                                 android:textStyle="bold"
@@ -347,6 +353,181 @@
                         android:layout_height="10dp" app:srcCompat="@drawable/current_time_indicator"
                         android:id="@+id/timetable_indicator"
                         android:contentDescription="@string/today_indicator_description"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical">
+
+
+                <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:showDividers="middle|beginning|end" android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:stretchColumns="*"
+                        android:shrinkColumns="*">
+
+                    <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp">
+
+                        <TextView
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/date_text4"
+                                android:textSize="32sp"
+                                android:layout_marginEnd="162dp"
+                                android:layout_marginRight="120dp"
+                                android:textColor="@color/white" android:gravity="start" tools:visibility="invisible"/>
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp">
+
+                        <TextView
+                                android:text="@string/today_s_progress"
+                                android:layout_width="173dp"
+                                android:layout_height="25dp"
+                                android:id="@+id/date_text6"
+                                android:textSize="16sp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="10dp" android:visibility="invisible"/>
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp">
+
+                        <ProgressBar
+                                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                                android:layout_width="100dp"
+                                android:layout_height="15dp"
+                                android:id="@+id/progressBar7"
+                                android:layout_marginBottom="20dp"
+                                android:visibility="invisible"/>
+
+                    </TableRow>
+
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="80dp">
+
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_gravity="start"
+                                android:gravity="center"
+                                android:layout_height="80dp" app:srcCompat="@drawable/task_icon"
+                                android:id="@+id/imageView5" android:paddingTop="5dp" android:paddingLeft="30dp"
+                                android:paddingBottom="5dp"/>
+                        <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_gravity="start"
+                                android:gravity="center"
+                                android:layout_height="80dp"
+                                app:srcCompat="@drawable/task_icon"
+                                android:radius="20dp"
+                                android:id="@+id/imageButton"/>
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:minHeight="40dp">
+
+                    </TableRow>
+
+
+                </TableLayout>
+
+
+
 
             </LinearLayout>
         </FrameLayout>

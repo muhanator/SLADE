@@ -22,4 +22,8 @@
     <string name="today_indicator_description">Indicates the current time of day in the timeline</string>
     <string name="today_s_progress">Today\'s Progress</string>
     <string name="moves_the_timetable_indicator">Moves the timetable indicator</string>
+
+    <string name="time_12_AM">12 AM</string>
+
+
 </resources>

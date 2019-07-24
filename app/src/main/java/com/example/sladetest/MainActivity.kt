@@ -51,12 +51,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         timetableView.post(Runnable { timetableView.scrollTo(0, 250) })
 
         //Below, we initialize the timetable time indicator so that it can move depending on the time of the day
-
         val  timetable_indicator_mover = findViewById<ImageView>(R.id.timetable_indicator_mover)
         val  hour = (calendar.get(Calendar.HOUR_OF_DAY)).toDouble()
         val  minute = calendar.get(Calendar.MINUTE).toDouble()
         val scale = resources.displayMetrics.density
-        val dpHeightInPx = ((118 + 40 * (hour + (minute/60.toDouble()))) * scale).toInt()     //calculation: ((start of 12AM row + rowHeight * ( hour + minute/60) )
+        val dpHeightInPx = ((118 + 80 * (hour + (minute/60.toDouble()))) * scale).toInt()     //calculation: ((start of 12AM row + rowHeight * ( hour + minute/60) )
         timetable_indicator_mover.layoutParams.height = dpHeightInPx
         timetable_indicator_mover.visibility = View.INVISIBLE
 
