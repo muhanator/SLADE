@@ -11,20 +11,13 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.widget.CalendarView
-import android.widget.Toast
 import android.content.Intent
+import android.view.View
+import android.widget.*
 import java.util.Calendar
-import android.widget.ProgressBar;
 
-import android.widget.TextView
 
 import java.text.DateFormat
-
-
-
-
-
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -50,9 +43,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //Below, we initialize the progress bar
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-
         progressBar.setProgress(50);
         progressBar.setMax(100);
+
+        //Below, we initilize the timetable scrollview
+        val timetableView = findViewById<ScrollView>(R.id.timetable_scrollview)
+        timetableView.post(Runnable { timetableView.scrollTo(0, 250) })
+
+        //Below, we initialize the timetable time indicator so that it can move depending on the time of the day
+
+        val  timetable_indicator_mover = findViewById<ImageView>(R.id.timetable_indicator_mover)
+        val  hour = (calendar.get(Calendar.HOUR_OF_DAY)).toDouble()
+        val  minute = calendar.get(Calendar.MINUTE).toDouble()
+        val scale = resources.displayMetrics.density
+        val dpHeightInPx = ((118 + 40 * (hour + (minute/60.toDouble()))) * scale).toInt()     //calculation: ((start of 12AM row + rowHeight * ( hour + minute/60) )
+        timetable_indicator_mover.layoutParams.height = dpHeightInPx
+        timetable_indicator_mover.visibility = View.INVISIBLE
+
 
 
         //Below, we initialize the action toolbar
