@@ -162,13 +162,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         //Create button #1
-        val taskButton = Button(this)
-        taskButton.setBackgroundColor(Color.parseColor("#00FFFFFF"))
-        var params = LinearLayout.LayoutParams(dpToPx(150.0),dpToPx(160.0))
-        params.setMargins(0, dpToPx(80.0), 0, 0)
-        taskButton.layoutParams = params
-        taskButton.setBackgroundResource(R.drawable.task_icon)
-        taskButton.setText("Task #1: Do the thing.")
+        val taskButton = createButton(1.0, 30.0, 4.0, 15.0, "Task #1: Do the thing")
 
         //Create button #2
         val taskButton2 = Button(this)
@@ -197,6 +191,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         frameLayout.addView(child2)
     }
 
+    fun createButton(startHour: Double, startMinute: Double, endHour: Double, endMinute: Double, description: String): Button{
+
+        val taskButton = Button(this)                                              //Create the button
+        taskButton.setBackgroundColor(Color.parseColor("#00FFFFFF"))            //Make the actual button invisible
+        var params = LinearLayout.LayoutParams(dpToPx(150.0),dpToPx((endHour-startHour + (endMinute/60.0 - startMinute/60.0)))*80)     //Create button dimensions depending on task length
+        params.setMargins(0, dpToPx((startHour + (startMinute/60.0))*80.0), 0, 0)
+        taskButton.layoutParams = params
+        taskButton.setBackgroundResource(R.drawable.task_icon)
+        taskButton.setText(description)
+
+        return taskButton
+    }
 
     fun dpToPx(size : Double): Int{
 
