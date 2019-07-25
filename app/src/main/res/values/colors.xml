@@ -6,7 +6,11 @@
     <color name="colorAccent">#D81B60</color>
     <color name="taskColor">#E9B359</color>
     <color name="taskColorAccent">#FF9C64</color>
+    <color name="taskColorAccent2">#FF6D1D</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="white_lowOpacity">#65FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="icon_shadow">#852B2929</color>
+
 </resources>
