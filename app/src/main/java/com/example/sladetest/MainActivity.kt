@@ -1,5 +1,6 @@
 package com.example.sladetest
 
+
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -15,18 +16,12 @@ import android.content.Intent
 import android.view.Gravity
 import android.view.View
 import android.widget.*
-import java.util.Calendar
 import android.view.ViewGroup.LayoutParams
 import android.graphics.Color
-
-
 import java.text.DateFormat
 import android.widget.LinearLayout
 import android.widget.TextView
-
-
-
-
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -68,7 +63,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         timetable_indicator_mover.visibility = View.INVISIBLE
 
         //Below, we update the schedule view with all of the tasks for the given day
-        updateScheduleView()
+        //updateScheduleView()
+        val frameLayout = findViewById<FrameLayout>(R.id.schedule_frame_layout)
+        var taskManager = TaskManager(111, resources.displayMetrics.density)
+        val task  = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0)
+        val task2 = taskManager.createTask(2019, 7, 25, 8 , 0, 10, 0)
+        val task3 = taskManager.createTask(2019, 7, 25, 3 , 0, 6 , 0)
+        val task4 = taskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0)
+        val task5 = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0)
+        task.setTaskDescription("This task was made created using task manager")
+        task2.setTaskDescription("This task2 was made created using task manager")
+        task3.setTaskDescription("This task3 was made created using task manager")
+        task4.setTaskDescription("This task4 was made created using task manager")
+        taskManager.updateTodayView(2019, 7, 25, frameLayout, this)
+
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -161,38 +169,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //taskButton.paddingTop = 100 */
 
 
-        //Create button #1
-        val taskButton = createButton(1.0, 30.0, 4.0, 15.0, "Task #1: Do the thing")
 
-        //Create button #2
-        val taskButton2 = Button(this)
-        taskButton2.setBackgroundColor(Color.parseColor("#00FFFFFF"))
-        var params2 = LinearLayout.LayoutParams(dpToPx(150.0),dpToPx(160.0))
-        params2.setMargins(0, dpToPx(160.0), 0, 0)
-        taskButton2.layoutParams = params2
-        taskButton2.setBackgroundResource(R.drawable.task_icon)
-        taskButton2.setText("Task #2: Do the other thing.")
+        val frameLayout = findViewById<FrameLayout>(R.id.schedule_frame_layout)
+
+        //Create button #1
+        //val taskButton = createButton (1.0, 30.0, 4.0, 15.0, "Task #1: Do the thing", frameLayout)
+        //val taskButton2 = createButton(2.0, 0.0, 4.0, 0.0, "Task #2: Do the other thing.", frameLayout)
+
 
         //Create a new LinearLayout
-        val child = LinearLayout(this)
+        /*val child = LinearLayout(this)
         child.setPadding(dpToPx(70.0), dpToPx(125.0), 0, 0)
         child.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        child.addView(taskButton)
+        child.addView(taskButton)*/
 
         //Create a new LinearLayout 2
-        val child2 = LinearLayout(this)
+        /*val child2 = LinearLayout(this)
         child2.setPadding(dpToPx(230.0), dpToPx(125.0), 0, 0)
         child2.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        child2.addView(taskButton2)
+        child2.addView(taskButton2)*/
 
         //Add the linear layout to the frame layout
-        val frameLayout = findViewById<FrameLayout>(R.id.schedule_frame_layout)
-        frameLayout.addView(child)
-        frameLayout.addView(child2)
+
+        //frameLayout.addView(child)
+        //frameLayout.addView(child2)
     }
 
-    fun createButton(startHour: Double, startMinute: Double, endHour: Double, endMinute: Double, description: String): Button{
+    fun createButton(startHour: Double, startMinute: Double, endHour: Double, endMinute: Double, description: String, frameLayout: FrameLayout): Button{
 
+        //Create the button
         val taskButton = Button(this)                                              //Create the button
         taskButton.setBackgroundColor(Color.parseColor("#00FFFFFF"))            //Make the actual button invisible
         var params = LinearLayout.LayoutParams(dpToPx(150.0),dpToPx((endHour-startHour + (endMinute/60.0 - startMinute/60.0)))*80)     //Create button dimensions depending on task length
@@ -200,6 +205,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         taskButton.layoutParams = params
         taskButton.setBackgroundResource(R.drawable.task_icon)
         taskButton.setText(description)
+
+        //Create a parent linear layout for the button, for formatting reasons
+        val child = LinearLayout(this)
+        child.setPadding(dpToPx(70.0), dpToPx(125.0), 0, 0)
+        child.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        child.addView(taskButton)
+
+        //Add button to frame layout
+        frameLayout.addView(child)
 
         return taskButton
     }
