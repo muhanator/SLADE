@@ -12,13 +12,13 @@
                     <gradient
                             android:angle="135"
 
-                            android:endColor= "@color/taskColorAccent"
+                            android:endColor= "@color/taskColorPriority1Accent"
 
-                            android:startColor="@color/taskColor"
+                            android:startColor="@color/taskColorPriority1"
                             android:type="linear" />
                     <stroke
                             android:width="2dp"
-                            android:color="@color/taskColorAccent2" />
+                            android:color="@color/taskColorPriority1Accent2" />
                     <corners android:radius="20dp" />
                     <size
                             android:width="175dp"
