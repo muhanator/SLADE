@@ -1,5 +1,6 @@
 package com.example.sladetest
 
+
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -11,40 +12,68 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.widget.CalendarView
-import android.widget.Toast
 import android.content.Intent
-import java.util.Calendar
-
-import android.widget.TextView
-
+import android.view.View
+import android.widget.*
 import java.text.DateFormat
-
-
-
-
-
+import android.widget.TextView
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    companion object{
+        //Declare Global Constants here
+
+        val TABLE_ROW_HEIGHT = 40
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //This function runs once upon creation of the activity
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Below, we have access to inputs that occur on the calendar
-        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-            Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
-        }
 
-        val calendar = Calendar.getInstance()
-        val currentDate = DateFormat.getDateInstance().format(calendar.time)
-        val textViewDate = findViewById<TextView>(R.id.date_text)
-        textViewDate.setText(currentDate)
+        //Below, we instantiate a calender to get the current date to display at the top of the page
+        val calendar      = Calendar.getInstance()
+        val currentDate   = DateFormat.getDateInstance().format(calendar.time)
+        val textViewDate  = findViewById<TextView>(R.id.date_text)
+        textViewDate.text = currentDate
+
+
+        //Below, we initialize the progress bar
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        progressBar.progress = 50
+        progressBar.max      = 100
+
+
+        //Below, we initialize the timetable time indicator (red line) so that it can move depending on the time of the day
+        val timetableIndicatorMover = findViewById<ImageView>(R.id.timetable_indicator_mover)
+        val hour                    = calendar.get(Calendar.HOUR_OF_DAY).toDouble()
+        val minute                  = calendar.get(Calendar.MINUTE).toDouble()
+        val dpHeightInPx            = dpToPx((118 + 80 * (hour + (minute/60.toDouble())))) //calculation: ((start of 12AM row + rowHeight * ( hour + minute/60) )
+
+        timetableIndicatorMover.layoutParams.height = dpHeightInPx
+        timetableIndicatorMover.visibility          = View.INVISIBLE
+
+
+        //Below, we update the schedule view with all of the tasks for the given day
+
+        val frameLayout = findViewById<FrameLayout>(R.id.schedule_frame_layout)
+        val taskManager = TaskManager(111, resources.displayMetrics.density)
+        val task        = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1)
+        val task2       = taskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2)
+        val task3       = taskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3)
+        val task4       = taskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4)
+        val task5       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1)
+        val task6       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2)
+        task.setTaskDescription("This task was made created using task manager")
+        task2.setTaskDescription("This task2 was made created using task manager")
+        task3.setTaskDescription("This task3 was made created using task manager")
+        task4.setTaskDescription("This task4 was made created using task manager")
+        taskManager.updateTodayView(2019, 7, 25, frameLayout, this)
+
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -122,6 +151,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun dpToPx(size : Double): Int{
+
+        val scale = resources.displayMetrics.density
+
+        return (size * scale + 0.5f).toInt()
     }
 
 

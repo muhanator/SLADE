@@ -2,19 +2,31 @@ package com.example.sladetest
 
 import java.util.*
 
-class Task (){
+import android.widget.*
 
-    private var date = Date()
+
+class Task (taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int){
+
+    var year        : Int
+    var month       : Int
+    var day         : Int
+    var startHour   : Int
+    var startMinute : Int
+    var endHour     : Int
+    var endMinute   : Int
+    var priority    : Int
+
     private var taskDescription = "Task Description"
 
-    fun setTaskDate(newDate: Date){
-
-        date = newDate
-    }
-
-    fun getTaskDate(): Date{
-
-        return date
+    init{
+        year        = taskYear
+        month       = taskMonth
+        day         = taskDay
+        startHour   = taskStartHour
+        startMinute = taskStartMinute
+        endHour     = taskEndHour
+        endMinute   = taskEndMinute
+        priority    = taskPriority
     }
 
     fun setTaskDescription(newTaskDescription: String){
