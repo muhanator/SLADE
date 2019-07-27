@@ -4,9 +4,25 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorSecondary">#004B85</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="taskColor">#E9B359</color>
-    <color name="taskColorAccent">#FF9C64</color>
-    <color name="taskColorAccent2">#FF6D1D</color>
+
+
+    <color name="taskColorPriority4">#1A85C0</color>
+    <color name="taskColorPriority4Accent">#1147DA</color>
+    <color name="taskColorPriority4Accent2">#5AC1FA</color>
+
+    <color name="taskColorPriority3">#79C441</color>
+    <color name="taskColorPriority3Accent">#1C7A0E</color>
+    <color name="taskColorPriority3Accent2">#00E454</color>
+
+    <color name="taskColorPriority2">#E9DB59</color>
+    <color name="taskColorPriority2Accent">#FF9C64</color>
+    <color name="taskColorPriority2Accent2">#FFCFBD</color>
+
+    <color name="taskColorPriority1">#E959A3</color>
+    <color name="taskColorPriority1Accent">#BE0F5E</color>
+    <color name="taskColorPriority1Accent2">#FF8697</color>
+
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="white_lowOpacity">#65FFFFFF</color>

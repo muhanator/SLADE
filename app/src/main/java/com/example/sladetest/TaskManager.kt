@@ -32,9 +32,9 @@ class TaskManager(identifier: Int, screenDensity: Float) {
     }
 
 
-    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int): Task{
+    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int): Task{
 
-        val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute)
+        val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority)
 
         allTasks.add(task)
 
@@ -57,8 +57,12 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         taskButton.layoutParams = params
 
         //Set the buttons's background, and text description
-        taskButton.setBackgroundResource(R.drawable.task_icon)
+        if(task.priority == 1)taskButton.setBackgroundResource(R.drawable.task_icon_priority1)
+        if(task.priority == 2)taskButton.setBackgroundResource(R.drawable.task_icon_priority2)
+        if(task.priority == 3)taskButton.setBackgroundResource(R.drawable.task_icon_priority3)
+        if(task.priority == 4)taskButton.setBackgroundResource(R.drawable.task_icon_priority4)
         taskButton.text = description
+        taskButton.setPadding(dpToPx(15.0),dpToPx(10.0),dpToPx(5.0), dpToPx(15.0))
 
         //Create a parent linear layout view for the button, so it can be placed in the right spot on the page
         val child = LinearLayout(context)

@@ -5,7 +5,7 @@ import java.util.*
 import android.widget.*
 
 
-class Task (taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int){
+class Task (taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int){
 
     var year        : Int
     var month       : Int
@@ -14,7 +14,7 @@ class Task (taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, tas
     var startMinute : Int
     var endHour     : Int
     var endMinute   : Int
-   // var taskButton  : Button //This is the task icon that shows up in the today view
+    var priority    : Int
 
     private var taskDescription = "Task Description"
 
@@ -26,7 +26,7 @@ class Task (taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, tas
         startMinute = taskStartMinute
         endHour     = taskEndHour
         endMinute   = taskEndMinute
-        //taskButton  = Button()
+        priority    = taskPriority
     }
 
     fun setTaskDescription(newTaskDescription: String){
