@@ -1,12 +1,14 @@
 package com.example.sladetest
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import java.util.*
 import android.view.ViewGroup.LayoutParams
+
 
 
 class TaskManager(identifier: Int, screenDensity: Float) {
@@ -72,6 +74,22 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Add button to frame layout
         frameLayout.addView(child)
+
+        //Add a clickListener to the button, so that clicking on a task can bring you to a page with more details of that task
+        taskButton.setOnClickListener {
+
+            val intent = Intent(context, TaskViewActivity::class.java)
+            intent.putExtra("taskDescription", task.getTaskDescription())
+            intent.putExtra("taskStartHour"  , task.startHour)
+            intent.putExtra("taskStartMinute", task.startMinute)
+            intent.putExtra("taskEndHour"    , task.endHour)
+            intent.putExtra("taskEndMinute"  , task.endMinute)
+            intent.putExtra("taskYear"       , task.year)
+            intent.putExtra("taskMonth"      , task.month)
+            intent.putExtra("taskDay"        , task.day)
+            intent.putExtra("taskPriority"   , task.priority)
+            context.startActivity(intent)
+        }
 
         return taskButton
     }

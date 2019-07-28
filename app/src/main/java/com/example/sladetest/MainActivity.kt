@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Below, we instantiate a calender to get the current date to display at the top of the page
         val calendar      = Calendar.getInstance()
         val currentDate   = DateFormat.getDateInstance().format(calendar.time)
-        val textViewDate  = findViewById<TextView>(R.id.date_text)
+        val textViewDate  = findViewById<TextView>(R.id.textView2)
         textViewDate.text = currentDate
 
 
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        //menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            //R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
     }

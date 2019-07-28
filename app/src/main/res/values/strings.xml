@@ -25,5 +25,7 @@
 
     <string name="time_12_AM">12 AM</string>
 
+    <string name="task_description">Task Description</string>
+    <string name="task">Task</string>
 
 </resources>
