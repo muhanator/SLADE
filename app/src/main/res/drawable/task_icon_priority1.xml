@@ -1,0 +1,31 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item android:right="5dp" android:top="5dp">
+                <shape>
+                    <corners android:radius="20dp" />
+                    <solid android:color="@color/icon_shadow" />
+                </shape>
+            </item>
+            <item android:bottom="8dp" android:left="8dp">
+                <shape>
+                    <gradient
+                            android:angle="135"
+
+                            android:endColor= "@color/taskColorPriority1Accent"
+
+                            android:startColor="@color/taskColorPriority1"
+                            android:type="linear" />
+                    <stroke
+                            android:width="2dp"
+                            android:color="@color/taskColorPriority1Accent2" />
+                    <corners android:radius="20dp" />
+                    <size
+                            android:width="175dp"
+                            android:height="100dp" />
+
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>
