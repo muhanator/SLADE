@@ -19,6 +19,19 @@ import java.util.Calendar
 import android.widget.TextView
 
 import java.text.DateFormat
+import com.facebook.CallbackManager
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.login.LoginResult
+import de.hdodenhof.circleimageview.CircleImageView
+import com.facebook.login.widget.LoginButton
+import com.facebook.login.LoginManager
+import com.facebook.FacebookCallback
+import android.util.Log
+import java.util.*
+
+
+
 
 
 
@@ -27,11 +40,42 @@ import java.text.DateFormat
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private val loginButton:LoginButton? = null
+    val textView:TextView? = null
+    val callbackManager:CallbackManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //initalizing the facebook sdk
         setContentView(R.layout.activity_main)
+
+        //facebook login:
+        val loginButton = findViewById(R.id.facebook_login_bn) as LoginButton
+        val textView = findViewById<TextView>(R.id.textView) as TextView
+        val callbackManager = CallbackManager.Factory.create()
+
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
+        LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    Log.d("MainActivity", "Facebook token: " + loginResult.accessToken.token)
+                    print("Login successful")
+                    startActivity(Intent(applicationContext, AuthenticatedActivity::class.java))
+                }
+
+                override fun onCancel() {
+                    Log.d("MainActivity", "Facebook onCancel.")
+
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d("MainActivity", "Facebook onError.")
+
+                }
+            })
+
 
         //Below, we have access to inputs that occur on the calendar
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
@@ -44,7 +88,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val calendar = Calendar.getInstance()
         val currentDate = DateFormat.getDateInstance().format(calendar.time)
         val textViewDate = findViewById<TextView>(R.id.date_text)
-        textViewDate.setText(currentDate)
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -69,9 +112,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setNavigationItemSelectedListener(this)
 
-
+        //Facebook code comin in:
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        callbackManager?.onActivityResult(requestCode, resultCode, data)
+    }
+
+
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
