@@ -19,7 +19,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendar)
+        setContentView(R.layout.activity_calendar) //this is where the layout gets connected to our activity
 
 
         //Below, we have access to inputs that occur on the calendar
