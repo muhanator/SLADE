@@ -33,9 +33,19 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         val taskDay         = intent.getStringExtra("taskDay"        )
         val taskPriorirty   = intent.getStringExtra("taskPriority"   )
 
-        //Below, we initialize the task description
+        //Below, we initialize the task information
         var taskDescriptionTextBox = findViewById<TextView>(R.id.task_description_text)
-        taskDescriptionTextBox.setText(taskDescription)
+        taskDescriptionTextBox.text = taskDescription
+
+
+        var taskPriorityTextBox = findViewById<TextView>(R.id.task_priority_text)
+        taskPriorityTextBox.text = taskPriorirty
+
+        var taskStartTimeTextBox = findViewById<TextView>(R.id.task_start_time_text)
+        taskStartTimeTextBox.text = taskStartHour
+
+        var taskEndTimeTextBox = findViewById<TextView>(R.id.task_end_time_text)
+        taskEndTimeTextBox.text = taskEndHour
 
 
         //Below, we initialize the action toolbar
