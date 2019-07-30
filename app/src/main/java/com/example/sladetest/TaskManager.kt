@@ -11,12 +11,13 @@ import android.view.ViewGroup.LayoutParams
 
 
 
+//This class is used to store all the information about each of the tasks
 class TaskManager(identifier: Int, screenDensity: Float) {
 
     var schedules = mutableListOf<Schedule>()
     val id        = "$identifier"
     val density   = screenDensity
-    var allTasks   = mutableListOf<Task>()
+    var allTasks   = mutableListOf<Task>() //List of all the tasks
 
     fun addSchedule(schedule: Schedule){
 
@@ -33,7 +34,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return schedules.get(index)
     }
 
-
+    //TODO: Task-14: This function will have to get called when after you have input the values to create a task
     fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int): Task{
 
         val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority)
@@ -55,8 +56,8 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Create the size, and layout parameters of the button
         val params = LinearLayout.LayoutParams(taskButtonWidth,dpToPx((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0)))*80)     //Create button dimensions depending on task length
-        params.setMargins(0, dpToPx((task.startHour + (task.startMinute/60.0))*80.0), 0, 0)
-        taskButton.layoutParams = params
+        params.setMargins(0, dpToPx((task.startHour + (task.startMinute/60.0))*80.0), 0, 0) //the 80 will have to be changed to a percentage
+        taskButton.layoutParams = params //setting the layout parameters of our task button to these specific parameters
 
         //Set the buttons's background, and text description
         if(task.priority == 1)taskButton.setBackgroundResource(R.drawable.task_icon_priority1)
@@ -78,7 +79,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         //Add a clickListener to the button, so that clicking on a task can bring you to a page with more details of that task
         taskButton.setOnClickListener {
 
-            val intent = Intent(context, TaskViewActivity::class.java)
+            val intent = Intent(context, TaskViewActivity::class.java) //Intent needs to be created everytime you want to start a new activity
             intent.putExtra("taskDescription", task.getTaskDescription())
             intent.putExtra("taskStartHour"  , task.startHour)
             intent.putExtra("taskStartMinute", task.startMinute)
@@ -94,6 +95,8 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return taskButton
     }
 
+
+    //TODO: This function will need to be called for task-14 (after finished creating a task)
     fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, context: Context){
 
         //Currently, we can support up to 4 columns of overlapping tasks
