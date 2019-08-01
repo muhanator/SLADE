@@ -92,16 +92,16 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
-                // Handle the camera action
+
                 intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
             R.id.nav_calendar -> {
-                intent = Intent(this, CalendarActivity::class.java)
-                startActivity(intent)
+
             }
             R.id.nav_tools -> {
-
+                intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
 

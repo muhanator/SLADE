@@ -159,6 +159,8 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
             R.id.nav_tools -> {
 
+                intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
 
