@@ -1,6 +1,5 @@
 package com.example.sladetest
 
-
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -119,6 +118,4 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         return (size * scale + 0.5f).toInt()
     }
-
-
 }
