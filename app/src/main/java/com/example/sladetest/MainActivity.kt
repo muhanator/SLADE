@@ -157,9 +157,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
+
             }
             R.id.nav_tools -> {
-1
+                intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+
             }
             R.id.nav_share -> {
 //                val task        = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1  , 1)
