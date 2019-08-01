@@ -25,10 +25,17 @@
 
     <string name="time_12_AM">12 AM</string>
 
-    <string name="task_description">Task Description</string>
+    <string name="task_description">Description</string>
     <string name="task">Task</string>
-    <string name="task_start_time">Task Start Time</string>
-    <string name="task_end_time">Task End Time</string>
+    <string name="task_start_time_title">Start Time</string>
+    <string name="task_time">%1$d:%2$d</string>
+    <string name="task_end_time_title">End Time</string>
+
+    <string name="task_date_title">Date</string>
+    <string name="task_date">%1$d/%2$d/%3$d</string>
+
     <string name="task_priority">Priority</string>
+
+    <string name="edit_task_button">Edit Task</string>
 
 </resources>

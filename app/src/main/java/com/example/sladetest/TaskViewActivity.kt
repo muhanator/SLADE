@@ -23,29 +23,33 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         setContentView(R.layout.activity_task_view)
 
         //Below, we receive data about that task
-        val taskDescription = intent.getStringExtra("taskDescription")
-        val taskStartHour   = intent.getStringExtra("taskStartHour"  )
-        val taskStartMinute = intent.getStringExtra("taskStartMinute")
-        val taskEndHour     = intent.getStringExtra("taskEndHour"    )
-        val taskEndMinute   = intent.getStringExtra("taskEndMinute"  )
-        val taskYear        = intent.getStringExtra("taskYear"       )
-        val taskMonth       = intent.getStringExtra("taskMonth"      )
-        val taskDay         = intent.getStringExtra("taskDay"        )
-        val taskPriorirty   = intent.getStringExtra("taskPriority"   )
+        val taskDescription = intent.extras?.getString("taskDescription")
+        val taskStartHour   = intent.extras?.getInt("taskStartHour"  )
+        val taskStartMinute = intent.extras?.getInt("taskStartMinute")
+        val taskEndHour     = intent.extras?.getInt("taskEndHour"    )
+        val taskEndMinute   = intent.extras?.getInt("taskEndMinute"  )
+        val taskYear        = intent.extras?.getInt("taskYear"       )
+        val taskMonth       = intent.extras?.getInt("taskMonth"      )
+        val taskDay         = intent.extras?.getInt("taskDay"        )
+        val taskPriority    = intent.extras?.getInt("taskPriority"   )
 
         //Below, we initialize the task information
-        var taskDescriptionTextBox = findViewById<TextView>(R.id.task_description_text)
+        val taskDescriptionTextBox = findViewById<TextView>(R.id.task_description_text)
         taskDescriptionTextBox.text = taskDescription
 
+        val taskPriorityTextBox = findViewById<TextView>(R.id.task_priority_text)
+        taskPriorityTextBox.text = taskPriority.toString()
 
-        var taskPriorityTextBox = findViewById<TextView>(R.id.task_priority_text)
-        taskPriorityTextBox.text = taskPriorirty
+        val dateTextBox = findViewById<TextView>(R.id.task_date)
+        dateTextBox.text = getString(R.string.task_date, taskDay, taskMonth, taskYear)
 
-        var taskStartTimeTextBox = findViewById<TextView>(R.id.task_start_time_text)
-        taskStartTimeTextBox.text = taskStartHour
+        val taskStartTimeTextBox = findViewById<TextView>(R.id.task_start_time_text)
+        taskStartTimeTextBox.text = getString(R.string.task_time, taskStartHour, taskStartMinute)
 
-        var taskEndTimeTextBox = findViewById<TextView>(R.id.task_end_time_text)
-        taskEndTimeTextBox.text = taskEndHour
+        val taskEndTimeTextBox = findViewById<TextView>(R.id.task_end_time_text)
+        taskEndTimeTextBox.text = getString(R.string.task_time, taskEndHour, taskEndMinute)
+
+
 
 
         //Below, we initialize the action toolbar
