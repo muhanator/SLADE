@@ -49,7 +49,6 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
             intent = Intent(this, TaskCreateActivity::class.java)
             startActivity(intent)
-            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -95,7 +94,6 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 // Handle the camera action
                 intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
@@ -103,6 +101,8 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
             R.id.nav_tools -> {
 
+                intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
 

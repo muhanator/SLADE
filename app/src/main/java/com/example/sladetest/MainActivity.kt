@@ -136,10 +136,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
-                finish()
+
             }
             R.id.nav_tools -> {
-
+                intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
 

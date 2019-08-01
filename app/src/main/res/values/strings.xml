@@ -26,6 +26,8 @@
     <string name="time_12_AM">12 AM</string>
 
     <string name="task_description">Task Description</string>
+    <string name="settings_title">Settings</string>
     <string name="task">Task</string>
+    <string name="night_mode">Night Mode</string>
 
 </resources>
