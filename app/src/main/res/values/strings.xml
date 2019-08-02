@@ -1,3 +1,6 @@
+<!--
+This xml file defines the string objects we can use to store info
+/-->
 <resources>
     <string name="app_name">SladeTest</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -25,6 +28,8 @@
 
     <string name="time_12_AM">12 AM</string>
 
+
+    <string name="task_name">Task Name</string>
     <string name="task_description">Task Description</string>
     <string name="task">Task</string>
 

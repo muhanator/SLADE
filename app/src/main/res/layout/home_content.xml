@@ -80,15 +80,15 @@
                               android:background="@drawable/table_border"
                               android:minHeight="80dp">
 
-                        <TextView
-                                android:paddingLeft="5dp"
-                                android:textStyle="bold"
-                                android:text="@string/time_12_AM"
-                                android:layout_width="67dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="start"
-                                android:gravity="end"
-                                android:id="@+id/textView2"/>
+                        <!--<TextView-->
+                                <!--android:paddingLeft="5dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--android:text="@string/time_12_AM"-->
+                                <!--android:layout_width="67dp"-->
+                                <!--android:layout_height="15dp"-->
+                                <!--android:layout_gravity="start"-->
+                                <!--android:gravity="end"-->
+                                <!--android:id="@+id/textView2"/>-->
 
 
                     </TableRow>

@@ -1,12 +1,12 @@
 package com.example.sladetest
 
+import android.app.ActionBar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.CalendarView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -16,11 +16,28 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
 
+//Class to create tasks and store them in a list
 class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_creation)
+
+
+        //Below, we initialize the timer picker
+        val timePicker = TimePicker(this)
+
+        val currentHour = timePicker.hour
+
+        var startTimeButton = findViewById<Button>(R.id.start_time_button)
+        startTimeButton.setOnClickListener{
+
+            var mPopupWindow = PopupWindow(timePicker, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
+            mPopupWindow.elevation = 5.0f
+        }
+
+
+
 
 
         //Below, we initialize the action toolbar
