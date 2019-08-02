@@ -19,6 +19,9 @@ import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
 import java.util.*
+import android.os.Build
+
+
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +31,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Playing around with the clock:
+//        var tvw = findViewById<TextView>(R.id.textView1)
+//        var picker = findViewById<TimePicker>(R.id.timePicker1)
+//        picker.setIs24HourView(true)
+//        var btnGet = findViewById<Button>(R.id.button1)
+//        btnGet.setOnClickListener {
+//            var hour: Int
+//            var minute: Int
+//            val am_pm: String
+//            hour = picker.hour
+//            minute = picker.minute
+//
+//            if (hour > 12) {
+//                am_pm = "PM"
+//                hour -= 12
+//            } else {
+//                am_pm = "AM"
+//            }
+//            tvw.text = "Selected Date: $hour:$minute $am_pm"
+//        }
 
 
         // Initialize the task manager
