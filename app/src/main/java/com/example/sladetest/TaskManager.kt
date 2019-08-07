@@ -2,12 +2,16 @@ package com.example.sladetest
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import java.util.*
 import android.view.ViewGroup.LayoutParams
+import android.util.DisplayMetrics
+
+
 
 
 
@@ -45,13 +49,16 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return task
     }
 
-    private fun createTaskIcon(task: Task, column: Int, taskButtonWidth: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
+    private fun createTaskIcon(task: Task, column: Int, nbOfColumns: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
 
         //Create the button
         val taskButton = Button(context)
 
         //Make the actual button invisible so only our task icon background shows
         taskButton.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+
+        //Calculate the task button width
+        val taskButtonWidth = (frameLayout.width)/nbOfColumns
 
         //Create the size, and layout parameters of the button
         val params = LinearLayout.LayoutParams(taskButtonWidth,dpToPx((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0)))*80)     //Create button dimensions depending on task length
@@ -68,7 +75,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Create a parent linear layout view for the button, so it can be placed in the right spot on the page
         val child = LinearLayout(context)
-        child.setPadding(dpToPx(70.0)+taskButtonWidth*(column-1), dpToPx(125.0), 0, 0)
+        child.setPadding((taskButtonWidth)*(column-1),0, 0, 0)
         child.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         child.addView(taskButton)
 
@@ -190,7 +197,9 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         }
 
         //We will now check how many columns have been populated, to determine the width each column can occupy
-        val screenWidth = dpToPx(300.0)
+
+
+
         var occupiedColumns = 4
         if(column1.isEmpty()){
             occupiedColumns--
@@ -204,23 +213,23 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         if(column4.isEmpty()){
             occupiedColumns--
         }
-        val taskButtonWidth = screenWidth/occupiedColumns
+        //val taskButtonWidth = screenWidth/occupiedColumns
 
         for (task in column1){
 
-            createTaskIcon(task, 1, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
+            createTaskIcon(task, 1, occupiedColumns, task.getTaskDescription(), frameLayout, context)
         }
         for (task in column2){
 
-            createTaskIcon(task, 2, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
+            createTaskIcon(task, 2, occupiedColumns,  task.getTaskDescription(), frameLayout, context)
         }
         for (task in column3){
 
-            createTaskIcon(task, 3, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
+            createTaskIcon(task, 3, occupiedColumns, task.getTaskDescription(), frameLayout, context)
         }
         for (task in column4){
 
-            createTaskIcon(task, 4, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
+            createTaskIcon(task, 4, occupiedColumns, task.getTaskDescription(), frameLayout, context)
         }
     }
 
