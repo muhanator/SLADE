@@ -75,7 +75,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Create a parent linear layout view for the button, so it can be placed in the right spot on the page
         val child = LinearLayout(context)
-        child.setPadding((taskButtonWidth)*(column-1),0, 0, 0)
+        child.setPadding((taskButtonWidth)*(column),0, 0, 0)
         child.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         child.addView(taskButton)
 
@@ -104,10 +104,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
     fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, context: Context){
 
         //Currently, we can support up to 4 columns of overlapping tasks
-        val column1   = mutableListOf<Task>()
-        val column2   = mutableListOf<Task>()
-        val column3   = mutableListOf<Task>()
-        val column4   = mutableListOf<Task>()
+        val tasksAdded   = mutableListOf<Task>()
 
         for(item in allTasks){
             //For all tasks in the task manager task list
@@ -115,122 +112,50 @@ class TaskManager(identifier: Int, screenDensity: Float) {
             if(item.year == year && item.month == month && item.day == day){
                 //If the task is for the requested day, add it to the view
 
-                ////////////////////////////
-                //Try placing it in column 1
-                ////////////////////////////
+                var nbOfCollisions = 0
 
-                var placeInColumn1 = true
+                for(otherItem in allTasks) {
+                    //For all tasks in the task manager task list
 
-                for(columnMember in column1){
+                    if (otherItem.year == year && otherItem.month == month && otherItem.day == day && item != otherItem) {
+                        // For each other task that day
 
-                    if(tasksCollide(item, columnMember)){
+                        if(tasksCollide(item, otherItem)){
+                            //Check if they collide
+                            nbOfCollisions++;
+                        }
 
-                        placeInColumn1 = false
                     }
                 }
-                if(placeInColumn1){
-
-                    column1.add(item)
-                    continue
-                }
-
-                ////////////////////////////
-                //Try placing it in column 2
-                ////////////////////////////
-
-                var placeInColumn2 = true
-
-                for(columnMember in column2){
-
-                    if(tasksCollide(item, columnMember)){
-
-                        placeInColumn2 = false
-                    }
-                }
-                if(placeInColumn2){
-
-
-                    column2.add(item)
-                    continue
-                }
-
-                ////////////////////////////
-                //Try placing it in column 3
-                ////////////////////////////
-
-                var placeInColumn3 = true
-
-                for(columnMember in column3){
-
-                    if(tasksCollide(item, columnMember)){
-
-                        placeInColumn3 = false
-                    }
-                }
-                if(placeInColumn3){
-
-
-                    column3.add(item)
-                    continue
-                }
-
-                ////////////////////////////
-                //Try placing it in column 4
-                ////////////////////////////
-
-                var placeInColumn4 = true
-
-                for(columnMember in column4){
-
-                    if(tasksCollide(item, columnMember)){
-
-                        placeInColumn4 = false
-                    }
-                }
-                if(placeInColumn4){
-
-
-                    column4.add(item)
-                    continue
-                }
+                //Store the number of collisions
+                item.nbOfCollisions = nbOfCollisions
             }
         }
 
-        //We will now check how many columns have been populated, to determine the width each column can occupy
+        for(item in allTasks){
+            //For all tasks in the task manager task list
 
+            var nbOfCollisionsWithAlreadyAddedTasks = 0
 
+            if(item.year == year && item.month == month && item.day == day){
+                //If the task is for the requested day, add it to the view
 
-        var occupiedColumns = 4
-        if(column1.isEmpty()){
-            occupiedColumns--
-        }
-        if(column2.isEmpty()){
-            occupiedColumns--
-        }
-        if(column3.isEmpty()){
-            occupiedColumns--
-        }
-        if(column4.isEmpty()){
-            occupiedColumns--
-        }
-        //val taskButtonWidth = screenWidth/occupiedColumns
+                for(addedItem in tasksAdded) {
+                    //For all tasks in the list of tasks already added
 
-        for (task in column1){
+                    if(tasksCollide(item, addedItem)){
 
-            createTaskIcon(task, 1, occupiedColumns, task.getTaskDescription(), frameLayout, context)
-        }
-        for (task in column2){
+                        nbOfCollisionsWithAlreadyAddedTasks++
 
-            createTaskIcon(task, 2, occupiedColumns,  task.getTaskDescription(), frameLayout, context)
-        }
-        for (task in column3){
+                    }
 
-            createTaskIcon(task, 3, occupiedColumns, task.getTaskDescription(), frameLayout, context)
-        }
-        for (task in column4){
+                }
+            }
 
-            createTaskIcon(task, 4, occupiedColumns, task.getTaskDescription(), frameLayout, context)
+            createTaskIcon(item, nbOfCollisionsWithAlreadyAddedTasks, item.nbOfCollisions + 1, item.getTaskDescription(), frameLayout, context)
+            tasksAdded.add(item)
         }
+
     }
 
     private fun dpToPx(size : Double): Int{

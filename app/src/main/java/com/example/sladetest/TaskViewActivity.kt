@@ -18,6 +18,13 @@ import com.google.android.material.snackbar.Snackbar
 
 class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    companion object TaskManager {
+
+    }
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_view)

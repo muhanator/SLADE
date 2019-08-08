@@ -62,12 +62,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Below, we update the schedule view with all of the tasks for the given day
         val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
         val taskManager = TaskManager(111, resources.displayMetrics.density)
+
+
         val task        = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1)
         val task2       = taskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2)
         val task3       = taskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3)
         val task4       = taskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4)
         val task5       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1)
         val task6       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2)
+        val task7       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1)
+        val task8       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2)
+        val task9       = taskManager.createTask(2019, 7, 25, 5 , 0, 6 , 0, 2)
         task.setTaskDescription("This task was made created using task manager")
         task2.setTaskDescription("This task2 was made created using task manager")
         task3.setTaskDescription("This task3 was made created using task manager")
