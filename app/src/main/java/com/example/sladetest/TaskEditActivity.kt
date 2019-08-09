@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.CalendarView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -15,12 +16,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
-
-class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.task_creation)
+        setContentView(R.layout.task_edit)
+
+        
+
 
 
         //Below, we initialize the action toolbar
@@ -31,13 +34,15 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+
+            intent = Intent(this, TaskCreateActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-
-
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
