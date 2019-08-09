@@ -3,6 +3,7 @@ package com.example.sladetest
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -79,15 +80,17 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         taskButton.setOnClickListener {
 
             val intent = Intent(context, TaskViewActivity::class.java)
-            intent.putExtra("taskDescription", task.getTaskDescription())
-            intent.putExtra("taskStartHour"  , task.startHour)
-            intent.putExtra("taskStartMinute", task.startMinute)
-            intent.putExtra("taskEndHour"    , task.endHour)
-            intent.putExtra("taskEndMinute"  , task.endMinute)
-            intent.putExtra("taskYear"       , task.year)
-            intent.putExtra("taskMonth"      , task.month)
-            intent.putExtra("taskDay"        , task.day)
-            intent.putExtra("taskPriority"   , task.priority)
+            val bundle = Bundle()
+            bundle.putString("taskDescription", task.getTaskDescription())
+            bundle.putInt("taskStartHour"  , task.startHour)
+            bundle.putInt("taskStartMinute", task.startMinute)
+            bundle.putInt("taskEndHour"    , task.endHour)
+            bundle.putInt("taskEndMinute"  , task.endMinute)
+            bundle.putInt("taskYear"       , task.year)
+            bundle.putInt("taskMonth"      , task.month)
+            bundle.putInt("taskDay"        , task.day)
+            bundle.putInt("taskPriority"   , task.priority)
+            intent.putExtras(bundle)
             context.startActivity(intent)
         }
 
