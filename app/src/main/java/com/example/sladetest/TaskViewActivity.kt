@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.CalendarView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -42,14 +40,13 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
+        val fab: FloatingActionButton = findViewById(R.id.create_task_plus_button)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
 
             intent = Intent(this, TaskCreateActivity::class.java)
             startActivity(intent)
-            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -95,7 +92,6 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 // Handle the camera action
                 intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)

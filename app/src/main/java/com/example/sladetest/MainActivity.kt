@@ -18,46 +18,19 @@ import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
 import java.util.*
-import android.os.Build
-
-
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     companion object{
         //Declare Global Constants here
-
         val TABLE_ROW_HEIGHT = 40
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //Playing around with the clock:
-//        var tvw = findViewById<TextView>(R.id.textView1)
-//        var picker = findViewById<TimePicker>(R.id.timePicker1)
-//        picker.setIs24HourView(true)
-//        var btnGet = findViewById<Button>(R.id.button1)
-//        btnGet.setOnClickListener {
-//            var hour: Int
-//            var minute: Int
-//            val am_pm: String
-//            hour = picker.hour
-//            minute = picker.minute
-//
-//            if (hour > 12) {
-//                am_pm = "PM"
-//                hour -= 12
-//            } else {
-//                am_pm = "AM"
-//            }
-//            tvw.text = "Selected Date: $hour:$minute $am_pm"
-//        }
-
 
         //Below, we instantiate a calender to get the current date to display at the top of the page
         val calendar      = Calendar.getInstance()
@@ -85,7 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Below, we update the schedule view with all of the tasks for the given day
 
         val frameLayout = findViewById<FrameLayout>(R.id.schedule_frame_layout)
-        val taskManager = TaskManager(111, resources.displayMetrics.density)
+        val taskManager = TaskManager(111, resources.displayMetrics.density) //should be the only instance, we give it the density because its not an activity
         val task        = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1)
         val task2       = taskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2)
         val task3       = taskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3)
@@ -103,14 +76,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
+        val fab: FloatingActionButton = findViewById(R.id.create_task_plus_button)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
 
             intent = Intent(this, TaskCreateActivity::class.java)
             startActivity(intent)
-            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -160,7 +132,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.nav_tools -> {
 

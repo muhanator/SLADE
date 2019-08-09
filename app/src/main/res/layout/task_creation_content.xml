@@ -6,8 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
-        tools:context=".MainActivity">
+        tools:context=".MainActivity" android:id="@+id/create_task_layout">
 
     <ImageView
             android:layout_width="wrap_content"
@@ -18,16 +17,6 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="105dp"
             android:layout_marginStart="105dp" android:layout_marginEnd="106dp" android:layout_marginRight="106dp"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!--TimePicker
-            android:gravity="center"
-            android:timePickerMode="spinner"
-            android:id="@+id/timePicker1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="256dp"/-->
 
     <TextView
             android:text="@string/create_a_task"
@@ -49,33 +38,14 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="150dp"/>
     <Button
-    android:text="Button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/start_time_button" tools:text="Start Time Don't click for now"
-    app:layout_constraintStart_toEndOf="@+id/imageView2" app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop="283dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_time_popup"
+            android:text="Start Time"
+            app:layout_constraintStart_toEndOf="@+id/imageView2" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="283dp"/>
 
-    <TimePicker
-            android:id="@+id/timePicker1"
-            android:timePickerMode="spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            android:layout_marginStart="70dp" tools:visibility="visible"
-            android:visibility="visible" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="287dp"/>
-    <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/timePicker1"
-            android:text="Get Date why not eh" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="400dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="232dp"/>
     <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
