@@ -2,12 +2,16 @@ package com.example.sladetest
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.view.ViewGroup.LayoutParams
+import android.util.DisplayMetrics
+
+
 
 
 
@@ -159,6 +163,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
             createTaskIcon(item, nbOfCollisionsWithAlreadyAddedTasks, item.nbOfCollisions + 1, item.getTaskDescription(), frameLayout, context)
             tasksAdded.add(item)
         }
+
     }
 
     private fun dpToPx(size : Double): Int{
