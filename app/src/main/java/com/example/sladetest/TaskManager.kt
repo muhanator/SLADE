@@ -7,31 +7,37 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import java.util.*
 import android.view.ViewGroup.LayoutParams
 
 
 
 class TaskManager(identifier: Int, screenDensity: Float) {
 
-    var schedules = mutableListOf<Schedule>()
+    var allSchedules = mutableListOf<Schedule>()
     val id        = "$identifier"
     val density   = screenDensity
-    var allTasks   = mutableListOf<Task>()
+    //var allTasks   = mutableListOf<Task>()
 
-    fun addSchedule(schedule: Schedule){
+    fun createSchedule(day: Int, month : Int, year : Int): Schedule{
 
-        schedules.add(schedule)
+        val newSchedule = Schedule(day, month, year)    // Create a new schedule
+        allSchedules.add(newSchedule)                   // Add it to the internal list of schedules for the task manager
+        return newSchedule                              // Return the newly created schedule
     }
-    fun getSchedule(date: Date): Schedule{
+    fun getSchedule(day: Int, month : Int, year : Int): Schedule{
 
-        var index = 0
+        val searchId = (10000)*year + (100)*month + day //Create the search ID
 
-        while(schedules.get(index).getScheduleDate().date != date.date)
-            {
-                index++
+        for (schedule in allSchedules){
+        // Here, we search the task manager's internal schedule list for the desired schedule
+
+            if(schedule.id == searchId){
+                return schedule
             }
-        return schedules.get(index)
+        }
+
+        // If we did not find the schedule in the list, we create it
+        return createSchedule(day, month, year)
     }
 
 
@@ -39,20 +45,22 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority)
 
-        allTasks.add(task)
-
-        //future implementation: add task to schedule of that day
+        val scheduleForTask = getSchedule(taskDay, taskMonth, taskYear)
+        scheduleForTask.addTask(task)
 
         return task
     }
 
-    private fun createTaskIcon(task: Task, column: Int, taskButtonWidth: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
+    private fun createTaskIcon(task: Task, column: Int, nbOfColumns: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
 
         //Create the button
         val taskButton = Button(context)
 
         //Make the actual button invisible so only our task icon background shows
         taskButton.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+
+        //Calculate the task button width
+        val taskButtonWidth = (frameLayout.width)/nbOfColumns
 
         //Create the size, and layout parameters of the button
         val params = LinearLayout.LayoutParams(taskButtonWidth,dpToPx((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0)))*80)     //Create button dimensions depending on task length
@@ -69,7 +77,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Create a parent linear layout view for the button, so it can be placed in the right spot on the page
         val child = LinearLayout(context)
-        child.setPadding(dpToPx(70.0)+taskButtonWidth*(column-1), dpToPx(125.0), 0, 0)
+        child.setPadding((taskButtonWidth)*(column),0, 0, 0)
         child.layoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         child.addView(taskButton)
 
@@ -91,6 +99,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
             bundle.putInt("taskDay"        , task.day)
             bundle.putInt("taskPriority"   , task.priority)
             intent.putExtras(bundle)
+          
             context.startActivity(intent)
         }
 
@@ -100,130 +109,55 @@ class TaskManager(identifier: Int, screenDensity: Float) {
     fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, context: Context){
 
         //Currently, we can support up to 4 columns of overlapping tasks
-        val column1   = mutableListOf<Task>()
-        val column2   = mutableListOf<Task>()
-        val column3   = mutableListOf<Task>()
-        val column4   = mutableListOf<Task>()
+        val tasksAdded   = mutableListOf<Task>()
+        var tasksThatDay = mutableListOf<Task>()
 
-        for(item in allTasks){
+        tasksThatDay = getSchedule(day, month, year).getScheduleTasks()
+
+        for(item in tasksThatDay){
+            //For all tasks that given day
+
+            var nbOfCollisions = 0
+
+            for(otherItem in tasksThatDay) {
+                //For all tasks that given day
+
+                if (otherItem.year == year && otherItem.month == month && otherItem.day == day && item != otherItem) {
+                    // For each other task that day
+
+                    if(tasksCollide(item, otherItem)){
+                        //Check if they collide
+                        nbOfCollisions++;
+                    }
+                 }
+            }
+            //Store the number of collisions
+            item.nbOfCollisions = nbOfCollisions
+
+        }
+
+        for(item in tasksThatDay){
             //For all tasks in the task manager task list
+
+            var nbOfCollisionsWithAlreadyAddedTasks = 0
 
             if(item.year == year && item.month == month && item.day == day){
                 //If the task is for the requested day, add it to the view
 
-                ////////////////////////////
-                //Try placing it in column 1
-                ////////////////////////////
+                for(addedItem in tasksAdded) {
+                    //For all tasks in the list of tasks already added
 
-                var placeInColumn1 = true
+                    if(tasksCollide(item, addedItem)){
 
-                for(columnMember in column1){
+                        nbOfCollisionsWithAlreadyAddedTasks++
 
-                    if(tasksCollide(item, columnMember)){
-
-                        placeInColumn1 = false
                     }
-                }
-                if(placeInColumn1){
 
-                    column1.add(item)
-                    continue
-                }
-
-                ////////////////////////////
-                //Try placing it in column 2
-                ////////////////////////////
-
-                var placeInColumn2 = true
-
-                for(columnMember in column2){
-
-                    if(tasksCollide(item, columnMember)){
-
-                        placeInColumn2 = false
-                    }
-                }
-                if(placeInColumn2){
-
-
-                    column2.add(item)
-                    continue
-                }
-
-                ////////////////////////////
-                //Try placing it in column 3
-                ////////////////////////////
-
-                var placeInColumn3 = true
-
-                for(columnMember in column3){
-
-                    if(tasksCollide(item, columnMember)){
-
-                        placeInColumn3 = false
-                    }
-                }
-                if(placeInColumn3){
-
-
-                    column3.add(item)
-                    continue
-                }
-
-                ////////////////////////////
-                //Try placing it in column 4
-                ////////////////////////////
-
-                var placeInColumn4 = true
-
-                for(columnMember in column4){
-
-                    if(tasksCollide(item, columnMember)){
-
-                        placeInColumn4 = false
-                    }
-                }
-                if(placeInColumn4){
-
-
-                    column4.add(item)
-                    continue
                 }
             }
-        }
 
-        //We will now check how many columns have been populated, to determine the width each column can occupy
-        val screenWidth = dpToPx(300.0)
-        var occupiedColumns = 4
-        if(column1.isEmpty()){
-            occupiedColumns--
-        }
-        if(column2.isEmpty()){
-            occupiedColumns--
-        }
-        if(column3.isEmpty()){
-            occupiedColumns--
-        }
-        if(column4.isEmpty()){
-            occupiedColumns--
-        }
-        val taskButtonWidth = screenWidth/occupiedColumns
-
-        for (task in column1){
-
-            createTaskIcon(task, 1, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
-        }
-        for (task in column2){
-
-            createTaskIcon(task, 2, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
-        }
-        for (task in column3){
-
-            createTaskIcon(task, 3, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
-        }
-        for (task in column4){
-
-            createTaskIcon(task, 4, taskButtonWidth, task.getTaskDescription(), frameLayout, context)
+            createTaskIcon(item, nbOfCollisionsWithAlreadyAddedTasks, item.nbOfCollisions + 1, item.getTaskDescription(), frameLayout, context)
+            tasksAdded.add(item)
         }
     }
 
