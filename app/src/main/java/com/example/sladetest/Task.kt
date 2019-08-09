@@ -29,6 +29,7 @@ class Task (taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, tas
         endMinute   = taskEndMinute
         priority    = taskPriority
         nbOfCollisions   = 0
+
     }
 
     fun setTaskDescription(newTaskDescription: String){

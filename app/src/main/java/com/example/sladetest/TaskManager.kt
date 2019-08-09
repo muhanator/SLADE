@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import java.util.*
 import android.view.ViewGroup.LayoutParams
 import android.util.DisplayMetrics
 
@@ -17,24 +17,31 @@ import android.util.DisplayMetrics
 
 class TaskManager(identifier: Int, screenDensity: Float) {
 
-    var schedules = mutableListOf<Schedule>()
+    var allSchedules = mutableListOf<Schedule>()
     val id        = "$identifier"
     val density   = screenDensity
-    var allTasks   = mutableListOf<Task>()
+    //var allTasks   = mutableListOf<Task>()
 
-    fun addSchedule(schedule: Schedule){
+    fun createSchedule(day: Int, month : Int, year : Int): Schedule{
 
-        schedules.add(schedule)
+        val newSchedule = Schedule(day, month, year)    // Create a new schedule
+        allSchedules.add(newSchedule)                   // Add it to the internal list of schedules for the task manager
+        return newSchedule                              // Return the newly created schedule
     }
-    fun getSchedule(date: Date): Schedule{
+    fun getSchedule(day: Int, month : Int, year : Int): Schedule{
 
-        var index = 0
+        val searchId = (10000)*year + (100)*month + day //Create the search ID
 
-        while(schedules.get(index).getScheduleDate().date != date.date)
-            {
-                index++
+        for (schedule in allSchedules){
+        // Here, we search the task manager's internal schedule list for the desired schedule
+
+            if(schedule.id == searchId){
+                return schedule
             }
-        return schedules.get(index)
+        }
+
+        // If we did not find the schedule in the list, we create it
+        return createSchedule(day, month, year)
     }
 
 
@@ -42,9 +49,8 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority)
 
-        allTasks.add(task)
-
-        //future implementation: add task to schedule of that day
+        val scheduleForTask = getSchedule(taskDay, taskMonth, taskYear)
+        scheduleForTask.addTask(task)
 
         return task
     }
@@ -86,15 +92,18 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         taskButton.setOnClickListener {
 
             val intent = Intent(context, TaskViewActivity::class.java)
-            intent.putExtra("taskDescription", task.getTaskDescription())
-            intent.putExtra("taskStartHour"  , task.startHour)
-            intent.putExtra("taskStartMinute", task.startMinute)
-            intent.putExtra("taskEndHour"    , task.endHour)
-            intent.putExtra("taskEndMinute"  , task.endMinute)
-            intent.putExtra("taskYear"       , task.year)
-            intent.putExtra("taskMonth"      , task.month)
-            intent.putExtra("taskDay"        , task.day)
-            intent.putExtra("taskPriority"   , task.priority)
+            val bundle = Bundle()
+            bundle.putString("taskDescription", task.getTaskDescription())
+            bundle.putInt("taskStartHour"  , task.startHour)
+            bundle.putInt("taskStartMinute", task.startMinute)
+            bundle.putInt("taskEndHour"    , task.endHour)
+            bundle.putInt("taskEndMinute"  , task.endMinute)
+            bundle.putInt("taskYear"       , task.year)
+            bundle.putInt("taskMonth"      , task.month)
+            bundle.putInt("taskDay"        , task.day)
+            bundle.putInt("taskPriority"   , task.priority)
+            intent.putExtras(bundle)
+          
             context.startActivity(intent)
         }
 
@@ -105,34 +114,33 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Currently, we can support up to 4 columns of overlapping tasks
         val tasksAdded   = mutableListOf<Task>()
+        var tasksThatDay = mutableListOf<Task>()
 
-        for(item in allTasks){
-            //For all tasks in the task manager task list
+        tasksThatDay = getSchedule(day, month, year).getScheduleTasks()
 
-            if(item.year == year && item.month == month && item.day == day){
-                //If the task is for the requested day, add it to the view
+        for(item in tasksThatDay){
+            //For all tasks that given day
 
-                var nbOfCollisions = 0
+            var nbOfCollisions = 0
 
-                for(otherItem in allTasks) {
-                    //For all tasks in the task manager task list
+            for(otherItem in tasksThatDay) {
+                //For all tasks that given day
 
-                    if (otherItem.year == year && otherItem.month == month && otherItem.day == day && item != otherItem) {
-                        // For each other task that day
+                if (otherItem.year == year && otherItem.month == month && otherItem.day == day && item != otherItem) {
+                    // For each other task that day
 
-                        if(tasksCollide(item, otherItem)){
-                            //Check if they collide
-                            nbOfCollisions++;
-                        }
-
+                    if(tasksCollide(item, otherItem)){
+                        //Check if they collide
+                        nbOfCollisions++;
                     }
-                }
-                //Store the number of collisions
-                item.nbOfCollisions = nbOfCollisions
+                 }
             }
+            //Store the number of collisions
+            item.nbOfCollisions = nbOfCollisions
+
         }
 
-        for(item in allTasks){
+        for(item in tasksThatDay){
             //For all tasks in the task manager task list
 
             var nbOfCollisionsWithAlreadyAddedTasks = 0
