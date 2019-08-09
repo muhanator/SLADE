@@ -55,6 +55,7 @@ This xml file defines the string objects we can use to store info
     <string name="task_name">Task Name</string>
     <string name="task_description">Task Description</string>
     <string name="task">Task</string>
+
     <string name="task_start_time_title">Start Time</string>
     <string name="task_time">%1$d:%2$d</string>
     <string name="task_end_time_title">End Time</string>
@@ -68,5 +69,5 @@ This xml file defines the string objects we can use to store info
     <string name="delete_task_button">Delete Task</string>
     <string name="complete_task">Complete Task</string>
 
-
+    <string name="start_time">%1$d:%2$d</string>
 </resources>

@@ -19,16 +19,12 @@ import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
 import java.util.*
-import android.os.Build
-
-
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -56,7 +52,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Initialize the task manager
         TaskManager.init(resources.displayMetrics.density)
-
 
         //Below, we instantiate a calender to get the current date to display at the top of the page
         val calendar      = Calendar.getInstance()
@@ -104,13 +99,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         })
 
-
-
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
+        val fab: FloatingActionButton = findViewById(R.id.create_task_plus_button)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -167,7 +160,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
-1
             }
             R.id.nav_tools -> {
 1
