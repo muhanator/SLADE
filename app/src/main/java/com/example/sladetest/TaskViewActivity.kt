@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
+//Used to show all the details of the task
 class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     companion object TaskManager {

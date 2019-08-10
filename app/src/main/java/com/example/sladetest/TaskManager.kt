@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.view.ViewGroup.LayoutParams
 
 
+//This class is used to store all the information about each of the tasks
 class TaskManager(identifier: Int, screenDensity: Float) {
 
     companion object{
@@ -20,7 +21,8 @@ class TaskManager(identifier: Int, screenDensity: Float) {
     var allSchedules = mutableListOf<Schedule>()
     val id        = "$identifier"
     val density   = screenDensity
-    //var allTasks   = mutableListOf<Task>()
+    var allTasks   = mutableListOf<Task>() //List of all the tasks
+
 
     fun createSchedule(day: Int, month : Int, year : Int): Schedule{
 
@@ -44,7 +46,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return createSchedule(day, month, year)
     }
 
-
+    //TODO: Task-14: This function will have to get called when after you have input the values to create a task
     fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int): Task{
 
         val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority)
@@ -90,7 +92,6 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Add a clickListener to the button, so that clicking on a task can bring you to a page with more details of that task
         taskButton.setOnClickListener {
-
             val intent = Intent(context, TaskViewActivity::class.java)
             val bundle = Bundle()
             bundle.putString("taskDescription", task.getTaskDescription())
@@ -103,13 +104,15 @@ class TaskManager(identifier: Int, screenDensity: Float) {
             bundle.putInt("taskDay"        , task.day)
             bundle.putInt("taskPriority"   , task.priority)
             intent.putExtras(bundle)
-          
+
             context.startActivity(intent)
         }
 
         return taskButton
     }
 
+
+   //TODO: This function will need to be called for task-14 (after finished creating a task)
     fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, rowHeight: Int, context: Context){
 
         //Currently, we can support up to 4 columns of overlapping tasks
