@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.content.Intent
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
@@ -59,20 +60,44 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         //Below, we update the schedule view with all of the tasks for the given day
-
-        val frameLayout = findViewById<FrameLayout>(R.id.schedule_frame_layout)
+        val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
+        val timeTableRow = findViewById<TableRow>(R.id.tableRow_12am)
         val taskManager = TaskManager(111, resources.displayMetrics.density)
+
+
         val task        = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1)
         val task2       = taskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2)
         val task3       = taskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3)
         val task4       = taskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4)
         val task5       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1)
         val task6       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2)
+        val task7       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1)
+        val task8       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2)
+        val task9       = taskManager.createTask(2019, 7, 25, 5 , 0, 6 , 0, 2)
+        val task10      = taskManager.createTask(2019, 7, 25, 0 , 0, 1 , 0, 2)
         task.setTaskDescription("This task was made created using task manager")
         task2.setTaskDescription("This task2 was made created using task manager")
         task3.setTaskDescription("This task3 was made created using task manager")
         task4.setTaskDescription("This task4 was made created using task manager")
-        taskManager.updateTodayView(2019, 7, 25, frameLayout, this)
+
+        val content = findViewById<View>(android.R.id.content)
+        content.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                //Remove it here unless you want to get this callback for EVERY
+                //layout pass, which can get you into infinite loops if you ever
+                //modify the layout from within this method.
+                content.viewTreeObserver.removeGlobalOnLayoutListener(this)
+
+                //Now you can get the width and height from content
+
+
+
+                taskManager.updateTodayView(2019, 7, 25, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
+
+
+            }
+        })
+
 
 
         //Below, we initialize the action toolbar
@@ -86,7 +111,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             intent = Intent(this, TaskCreateActivity::class.java)
             startActivity(intent)
-            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -101,6 +125,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     }
+
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -136,7 +161,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
-                finish()
+
             }
             R.id.nav_tools -> {
 
