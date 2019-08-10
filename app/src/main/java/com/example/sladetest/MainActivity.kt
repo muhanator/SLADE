@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //Below, we update the schedule view with all of the tasks for the given day
         val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
+        val timeTableRow = findViewById<TableRow>(R.id.tableRow_12am)
         val taskManager = TaskManager(111, resources.displayMetrics.density)
 
 
@@ -73,12 +74,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val task7       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1)
         val task8       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2)
         val task9       = taskManager.createTask(2019, 7, 25, 5 , 0, 6 , 0, 2)
+        val task10      = taskManager.createTask(2019, 7, 25, 0 , 0, 1 , 0, 2)
         task.setTaskDescription("This task was made created using task manager")
         task2.setTaskDescription("This task2 was made created using task manager")
         task3.setTaskDescription("This task3 was made created using task manager")
         task4.setTaskDescription("This task4 was made created using task manager")
-
-
 
         val content = findViewById<View>(android.R.id.content)
         content.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
-                taskManager.updateTodayView(2019, 7, 25, frameLayout, this@MainActivity)
+                taskManager.updateTodayView(2019, 7, 25, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
 
 
             }

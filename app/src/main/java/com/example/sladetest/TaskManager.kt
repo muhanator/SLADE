@@ -1,21 +1,21 @@
 package com.example.sladetest
-
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.view.ViewGroup.LayoutParams
-import android.util.DisplayMetrics
-
-
-
 
 
 class TaskManager(identifier: Int, screenDensity: Float) {
+
+    companion object{
+        //Declare Global Constants here
+
+        val TABLE_BORDER_THICKNESS = 3
+    }
 
     var allSchedules = mutableListOf<Schedule>()
     val id        = "$identifier"
@@ -55,7 +55,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return task
     }
 
-    private fun createTaskIcon(task: Task, column: Int, nbOfColumns: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
+    private fun createTaskIcon(task: Task, column: Int, nbOfColumns: Int, rowHeight: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
 
         //Create the button
         val taskButton = Button(context)
@@ -67,8 +67,8 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         val taskButtonWidth = (frameLayout.width)/nbOfColumns
 
         //Create the size, and layout parameters of the button
-        val params = LinearLayout.LayoutParams(taskButtonWidth,dpToPx((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0)))*80)     //Create button dimensions depending on task length
-        params.setMargins(0, dpToPx((task.startHour + (task.startMinute/60.0))*80.0), 0, 0)
+        val params = LinearLayout.LayoutParams(taskButtonWidth,((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0))*rowHeight).toInt())     //Create button dimensions depending on task length
+        params.setMargins(0, dpToPx((task.startHour + (task.startMinute/60.0))*80.0)- TABLE_BORDER_THICKNESS, 0, 0)
         taskButton.layoutParams = params
 
         //Set the buttons's background, and text description
@@ -110,7 +110,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return taskButton
     }
 
-    fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, context: Context){
+    fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, rowHeight: Int, context: Context){
 
         //Currently, we can support up to 4 columns of overlapping tasks
         val tasksAdded   = mutableListOf<Task>()
@@ -160,7 +160,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
                 }
             }
 
-            createTaskIcon(item, nbOfCollisionsWithAlreadyAddedTasks, item.nbOfCollisions + 1, item.getTaskDescription(), frameLayout, context)
+            createTaskIcon(item, nbOfCollisionsWithAlreadyAddedTasks, item.nbOfCollisions + 1, rowHeight, item.getTaskDescription(), frameLayout, context)
             tasksAdded.add(item)
         }
 
