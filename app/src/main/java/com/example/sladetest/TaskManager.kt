@@ -8,19 +8,17 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.view.ViewGroup.LayoutParams
 
-
 //This class is used to store all the information about each of the tasks
-class TaskManager(identifier: Int, screenDensity: Float) {
+object TaskManager{
 
-    companion object{
-        //Declare Global Constants here
+    var density = 0.toFloat()
+    val TABLE_BORDER_THICKNESS = 3
 
-        val TABLE_BORDER_THICKNESS = 3
+    fun init(screenDensity: Float){
+        density   = screenDensity
     }
 
     var allSchedules = mutableListOf<Schedule>()
-    val id        = "$identifier"
-    val density   = screenDensity
     var allTasks   = mutableListOf<Task>() //List of all the tasks
 
 
@@ -47,9 +45,9 @@ class TaskManager(identifier: Int, screenDensity: Float) {
     }
 
     //TODO: Task-14: This function will have to get called when after you have input the values to create a task
-    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int): Task{
+    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int, taskID: Int): Task{
 
-        val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority)
+        val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority, taskID)
 
         val scheduleForTask = getSchedule(taskDay, taskMonth, taskYear)
         scheduleForTask.addTask(task)
@@ -93,18 +91,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         //Add a clickListener to the button, so that clicking on a task can bring you to a page with more details of that task
         taskButton.setOnClickListener {
             val intent = Intent(context, TaskViewActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("taskDescription", task.getTaskDescription())
-            bundle.putInt("taskStartHour"  , task.startHour)
-            bundle.putInt("taskStartMinute", task.startMinute)
-            bundle.putInt("taskEndHour"    , task.endHour)
-            bundle.putInt("taskEndMinute"  , task.endMinute)
-            bundle.putInt("taskYear"       , task.year)
-            bundle.putInt("taskMonth"      , task.month)
-            bundle.putInt("taskDay"        , task.day)
-            bundle.putInt("taskPriority"   , task.priority)
-            intent.putExtras(bundle)
-
+            intent.putExtra("task", task)
             context.startActivity(intent)
         }
 

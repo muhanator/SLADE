@@ -1,14 +1,14 @@
 package com.example.sladetest
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -16,31 +16,28 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.task_view_content.*
 
 //Used to show all the details of the task
 class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    companion object TaskManager {
-
-    }
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_view)
 
+        val nullableTask = intent.extras?.getSerializable("task") as? Task
+        val task = nullableTask!!
+
         //Below, we receive data about that task
-        val taskDescription = intent.extras?.getString("taskDescription")
-        val taskStartHour   = intent.extras?.getInt("taskStartHour"  )
-        val taskStartMinute = intent.extras?.getInt("taskStartMinute")
-        val taskEndHour     = intent.extras?.getInt("taskEndHour"    )
-        val taskEndMinute   = intent.extras?.getInt("taskEndMinute"  )
-        val taskYear        = intent.extras?.getInt("taskYear"       )
-        val taskMonth       = intent.extras?.getInt("taskMonth"      )
-        val taskDay         = intent.extras?.getInt("taskDay"        )
-        val taskPriority    = intent.extras?.getInt("taskPriority"   )
+        val taskDescription = task.getTaskDescription()
+        val taskStartHour   = task.startHour
+        val taskStartMinute = task.startMinute
+        val taskEndHour     = task.endHour
+        val taskEndMinute   = task.endMinute
+        val taskYear        = task.year
+        val taskMonth       = task.month
+        val taskDay         = task.day
+        val taskPriority    = task.priority
 
         //Below, we initialize the task information
         val taskDescriptionTextBox = findViewById<TextView>(R.id.task_description_text)
@@ -65,19 +62,38 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         editTaskButton.setOnClickListener {
 
             val intent = Intent(this, TaskEditActivity::class.java)
-            //val bundle = Bundle()
-            //bundle.putString("taskDescription", task.getTaskDescription())
-            //bundle.putInt("taskStartHour"  , task.startHour)
-            //bundle.putInt("taskStartMinute", task.startMinute)
-            //bundle.putInt("taskEndHour"    , task.endHour)
-            //bundle.putInt("taskEndMinute"  , task.endMinute)
-            //bundle.putInt("taskYear"       , task.year)
-            //bundle.putInt("taskMonth"      , task.month)
-            //bundle.putInt("taskDay"        , task.day)
-            //bundle.putInt("taskPriority"   , task.priority)
-            //intent.putExtras(bundle)
             this.startActivity(intent)
         }
+
+        //Below, we initialize the "Delete Task" button
+        val deleteTaskButton = findViewById<Button>(R.id.delete_task_button)
+
+        deleteTaskButton.setOnClickListener {
+
+            val taskSchedule = TaskManager.getSchedule(task.day, task.month, task.year)
+            var taskToRemove: Task
+            taskToRemove = task //This is a dummy line that means nothing
+
+            for(scheduleTask in taskSchedule.tasks){
+
+                if(task.id == scheduleTask.id){
+
+                    taskToRemove = scheduleTask
+                }
+            }
+
+            val hasBeenRemoved = taskSchedule.getScheduleTasks().remove(taskToRemove)
+
+            val intent = Intent(this, MainActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        //Below, we initialize the completion switch
+        val completionSwitch = findViewById<Switch>(R.id.completion_switch)
+        completion_switch.setOnClickListener{
+
+        }
+
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -136,7 +152,6 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 // Handle the camera action
                 intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
