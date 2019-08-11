@@ -30,8 +30,11 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import android.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.android.synthetic.main.task_creation_content.*
+import android.view.View
 
 
 //Class to create tasks and store them in a list
@@ -43,6 +46,15 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_creation_content) //setting the background to the task_creation.xml
         //val currentHour = timePicker.hour
+
+        var currentHour = 0
+        var currentMinute = 0
+        var currentYear = 0
+        var currentMonth = 0
+        var currentDay = 0
+        var endHour = 0
+        var endMinute = 0
+        var priority = ""
 
         var startTimeButton = findViewById<Button>(R.id.start_time_popup)
         startTimeButton.setOnClickListener{
@@ -79,33 +91,28 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 val tv = view.findViewById<TextView>(R.id.text_view)
                 val buttonPopup = view.findViewById<Button>(R.id.dismiss)
                 val startTimePicker = view.findViewById<TimePicker>(R.id.start_time_picker)
+                val endTimePicker = view.findViewById<TimePicker>(R.id.end_time_picker)
 
                 // Set click listener for popup window's text view
                 tv.setOnClickListener{
                     // Change the text color of popup window's text view
                     tv.setTextColor(Color.RED)
                 }
-                var currentHour = 0
-                var currentMinute = 0
-                var currentYear = 0
-                var currentMonth =0
-                var currentDay = 0
-                var endHour = 0
-                var endMinute = 0
-                var priority = 0
 
 
                 // Set a click listener for popup's button widget
                 buttonPopup.setOnClickListener{
                     currentHour = startTimePicker.hour
                     currentMinute = startTimePicker.minute
+                    endHour = endTimePicker.hour
+                    endMinute = endTimePicker.minute
                     // Dismiss the popup window
                     popupWindow.dismiss()
                 }
 
                 // Set a dismiss listener for popup window
                 popupWindow.setOnDismissListener {
-                    Toast.makeText(applicationContext,getString(R.string.start_time, currentHour, currentMinute),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,getString(R.string.start_time, endHour - currentHour, endMinute - currentMinute),Toast.LENGTH_SHORT).show()
                 }
 
                 // Finally, show the popup window on app
@@ -117,27 +124,49 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                     0 // Y offset
                 )
 
-                //NEED A WAY TO STORE THE TIME IN
+                // Create an ArrayAdapter
+                val adapter = ArrayAdapter.createFromResource(this,
+                    R.array.priority_list, android.R.layout.simple_spinner_item)
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                priority_spinner.adapter = adapter
+                priority = priority_spinner.selectedItem.toString()
 
-//                val startTime = findViewById<TimePicker>(R.id.start_time_picker)
-//                val saySomething = view.findViewById<TextView>(R.id.textView1)
-//                startTime.setOnTimeChangedListener{
-//                        view,hourOfDay,minute->
-//                    saySomething.text = "Time(HH:MM) ${(hourOfDay)} " +
-//                            ": $minute ${(hourOfDay)}"
-//                }
+                //calender
+                val c = Calendar.getInstance()
+                val year = c.get(Calendar.YEAR)
+                val month = c.get(Calendar.MONTH)
+                val day = c.get(Calendar.DAY_OF_MONTH)
 
-//                val now = Calendar.getInstance()
-//                val timePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-//                    val selectedTime = Calendar.getInstance()
-//                    selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
-//                    selectedTime.set(Calendar.MINUTE,minute)
-//                    startTimeButton.text = timeFormat.format(selectedTime.time)
-//                },
-//                    now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),false)
-//                timePicker.show()
+                //Button to show click date
+                val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                    textView2.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    currentDay = mDay
+                    currentYear = mYear
+                    currentMonth = mMonth
+                }, year, month, day)
+
+                //show the dialog
+                dpd.show()
             }
         }
+
+        val createTaskButton = findViewById<Button>(R.id.create_task_button)
+        createTaskButton.setOnClickListener{
+            val taskManager = TaskManager(111, resources.displayMetrics.density)
+            //This is where we create our task
+            val task = taskManager.createTask(currentYear, currentMonth, currentDay, currentHour, currentMinute, endHour, endMinute, priority.toInt())
+        }
+    }
+
+
+    fun createTask(view: View) {
+        val taskManager = TaskManager(111, resources.displayMetrics.density)
+        val task = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1)
+
+        Toast.makeText(this, "Spinner 1 " + priority_spinner.selectedItem.toString() +
+                "\nSpinner 2 " + priority_spinner.selectedItem.toString(), Toast.LENGTH_LONG).show()
     }
 
     override fun onBackPressed() {

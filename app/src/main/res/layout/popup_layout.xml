@@ -27,4 +27,12 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:visibility="visible" tools:visibility="visible"/>
+
+    <TimePicker
+            android:id="@+id/end_time_picker"
+            android:timePickerMode="spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible" tools:visibility="visible"/>
 </LinearLayout>
