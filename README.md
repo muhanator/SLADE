@@ -14,6 +14,8 @@ When working on an issue:
 - You will be assigned issues or you will assign yourself issues that you want to work on 
 1) If you are working on "TASK-20": Then follow the commands:
 
+$ git checkout master
+$ git pull
 $ git checkout -b TASK-20-Description-about-your-task master
 
 2) when making and committing changes:
@@ -31,10 +33,23 @@ $git push (to push your local changes to github)
 - After you have committed a change, you have to go onto Github and create a Pull Request and assign someone to review the PR for you
 - Once they have reviewed and approved your changes, you can merge to master
 
+*** COMMON ISSUES ***
+Rebasing:
+- when you are working on your TASK branch and some changes have been made in the MASTER branch, then you need to pull those changes and rebase so that you are working on the latest code:
+
+$ git checkout <TASK-BRANCH>
+$ git rebase master
+
+- fix all the conflixts that arise in the editor 
+
+$ git add .
+$ git rebase --continue
+
+
 
 TEAM MEMBERS:
 
-- Muhammad Saad Mujtaba, @muhanator# SLADE
+- Muhammad Saad Mujtaba, @muhanator
 - Michael Lee, @mlee97
 - Jeremy Davis, @jeremy-davis-mcgill
 - Armando Mancino, @mandocino

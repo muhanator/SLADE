@@ -1,5 +1,4 @@
 package com.example.sladetest
-
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -9,14 +8,19 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.view.ViewGroup.LayoutParams
 
+//This class is used to store all the information about each of the tasks
+object TaskManager{
 
+    var density = 0.toFloat()
+    val TABLE_BORDER_THICKNESS = 3
 
-class TaskManager(identifier: Int, screenDensity: Float) {
+    fun init(screenDensity: Float){
+        density   = screenDensity
+    }
 
     var allSchedules = mutableListOf<Schedule>()
-    val id        = "$identifier"
-    val density   = screenDensity
-    //var allTasks   = mutableListOf<Task>()
+    var allTasks   = mutableListOf<Task>() //List of all the tasks
+
 
     fun createSchedule(day: Int, month : Int, year : Int): Schedule{
 
@@ -40,10 +44,10 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return createSchedule(day, month, year)
     }
 
+    //TODO: Task-14: This function will have to get called when after you have input the values to create a task
+    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int, taskID: Int): Task{
 
-    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int): Task{
-
-        val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority)
+        val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority, taskID)
 
         val scheduleForTask = getSchedule(taskDay, taskMonth, taskYear)
         scheduleForTask.addTask(task)
@@ -51,7 +55,7 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         return task
     }
 
-    private fun createTaskIcon(task: Task, column: Int, nbOfColumns: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
+    private fun createTaskIcon(task: Task, column: Int, nbOfColumns: Int, rowHeight: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
 
         //Create the button
         val taskButton = Button(context)
@@ -63,8 +67,8 @@ class TaskManager(identifier: Int, screenDensity: Float) {
         val taskButtonWidth = (frameLayout.width)/nbOfColumns
 
         //Create the size, and layout parameters of the button
-        val params = LinearLayout.LayoutParams(taskButtonWidth,dpToPx((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0)))*80)     //Create button dimensions depending on task length
-        params.setMargins(0, dpToPx((task.startHour + (task.startMinute/60.0))*80.0), 0, 0)
+        val params = LinearLayout.LayoutParams(taskButtonWidth,((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0))*rowHeight).toInt())     //Create button dimensions depending on task length
+        params.setMargins(0, dpToPx((task.startHour + (task.startMinute/60.0))*80.0)- TABLE_BORDER_THICKNESS, 0, 0)
         taskButton.layoutParams = params
 
         //Set the buttons's background, and text description
@@ -86,27 +90,17 @@ class TaskManager(identifier: Int, screenDensity: Float) {
 
         //Add a clickListener to the button, so that clicking on a task can bring you to a page with more details of that task
         taskButton.setOnClickListener {
-
             val intent = Intent(context, TaskViewActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("taskDescription", task.getTaskDescription())
-            bundle.putInt("taskStartHour"  , task.startHour)
-            bundle.putInt("taskStartMinute", task.startMinute)
-            bundle.putInt("taskEndHour"    , task.endHour)
-            bundle.putInt("taskEndMinute"  , task.endMinute)
-            bundle.putInt("taskYear"       , task.year)
-            bundle.putInt("taskMonth"      , task.month)
-            bundle.putInt("taskDay"        , task.day)
-            bundle.putInt("taskPriority"   , task.priority)
-            intent.putExtras(bundle)
-          
+            intent.putExtra("task", task)
             context.startActivity(intent)
         }
 
         return taskButton
     }
 
-    fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, context: Context){
+
+   //TODO: This function will need to be called for task-14 (after finished creating a task)
+    fun updateTodayView(year: Int, month: Int, day: Int, frameLayout: FrameLayout, rowHeight: Int, context: Context){
 
         //Currently, we can support up to 4 columns of overlapping tasks
         val tasksAdded   = mutableListOf<Task>()
@@ -156,9 +150,10 @@ class TaskManager(identifier: Int, screenDensity: Float) {
                 }
             }
 
-            createTaskIcon(item, nbOfCollisionsWithAlreadyAddedTasks, item.nbOfCollisions + 1, item.getTaskDescription(), frameLayout, context)
+            createTaskIcon(item, nbOfCollisionsWithAlreadyAddedTasks, item.nbOfCollisions + 1, rowHeight, item.getTaskDescription(), frameLayout, context)
             tasksAdded.add(item)
         }
+
     }
 
     private fun dpToPx(size : Double): Int{
