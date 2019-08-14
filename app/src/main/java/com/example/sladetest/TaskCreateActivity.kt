@@ -141,10 +141,9 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
                 //Button to show click date
                 val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-                    textView2.setText("" + mDay + "/" + mMonth + "/" + mYear)
                     currentDay = mDay
                     currentYear = mYear
-                    currentMonth = mMonth
+                    currentMonth = mMonth + 1
                 }, year, month, day)
 
                 //show the dialog
@@ -153,30 +152,32 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
 
         val createTaskButton = findViewById<Button>(R.id.create_task_button)
+        var id = 1
         createTaskButton.setOnClickListener{
-            val taskManager = TaskManager(111, resources.displayMetrics.density)
             //This is where we create our task
-            val task = taskManager.createTask(currentYear, currentMonth, currentDay, currentHour, currentMinute, endHour, endMinute, priority.toInt())
+
+            val task = TaskManager.createTask(currentYear, currentMonth, currentDay, currentHour, currentMinute, endHour, endMinute, priority, id++)
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
 
-    fun createTask(view: View) {
-        val taskManager = TaskManager(111, resources.displayMetrics.density)
-        val task = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1)
+//    fun createTask(view: View) {
+//        val task = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1, 1)
+//
+//        Toast.makeText(this, "Spinner 1 " + priority_spinner.selectedItem.toString() +
+//                "\nSpinner 2 " + priority_spinner.selectedItem.toString(), Toast.LENGTH_LONG).show()
+//    }
 
-        Toast.makeText(this, "Spinner 1 " + priority_spinner.selectedItem.toString() +
-                "\nSpinner 2 " + priority_spinner.selectedItem.toString(), Toast.LENGTH_LONG).show()
-    }
-
-    override fun onBackPressed() {
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
+//    override fun onBackPressed() {
+//        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+//        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+//            drawerLayout.closeDrawer(GravityCompat.START)
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

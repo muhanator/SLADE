@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 //Now you can get the width and height from content
 
-                TaskManager.updateTodayView(2019, 7, 25, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
+                TaskManager.updateTodayView(2019, 8, 13, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
 
 
             }
@@ -165,20 +165,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 1
             }
             R.id.nav_share -> {
-                val task        = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1  , 1)
-                val task2       = TaskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2  , 2)
-                val task3       = TaskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3, 3)
-                val task4       = TaskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4  , 4)
-                val task5       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 5)
-                val task6       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 6)
-                val task7       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 7)
-                val task8       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 8)
-                val task9       = TaskManager.createTask(2019, 7, 25, 5 , 0, 6 , 0, 2  , 9)
-                val task10      = TaskManager.createTask(2019, 7, 25, 0 , 0, 1 , 0, 2  , 10)
-                task.setTaskDescription("This task was made created using task manager")
-                task2.setTaskDescription("This task2 was made created using task manager")
-                task3.setTaskDescription("This task3 was made created using task manager")
-                task4.setTaskDescription("This task4 was made created using task manager")
+//                val task        = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1  , 1)
+//                val task2       = TaskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2  , 2)
+//                val task3       = TaskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3, 3)
+//                val task4       = TaskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4  , 4)
+//                val task5       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 5)
+//                val task6       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 6)
+//                val task7       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 7)
+//                val task8       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 8)
+//                val task9       = TaskManager.createTask(2019, 7, 25, 5 , 0, 6 , 0, 2  , 9)
+//                val task10      = TaskManager.createTask(2019, 7, 25, 0 , 0, 1 , 0, 2  , 10)
+//                task.setTaskDescription("This task was made created using task manager")
+//                task2.setTaskDescription("This task2 was made created using task manager")
+//                task3.setTaskDescription("This task3 was made created using task manager")
+//                task4.setTaskDescription("This task4 was made created using task manager")
 
             }
             R.id.nav_send -> {
