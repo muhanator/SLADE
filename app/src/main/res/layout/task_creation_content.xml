@@ -46,8 +46,6 @@
             app:layout_constraintStart_toEndOf="@+id/imageView2" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="283dp"/>
-
-
     <Spinner
             android:id="@+id/priority_spinner"
             android:layout_width="274dp"
@@ -69,9 +67,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="616dp"
             android:text= "Finish Creating Task"
-            android:onClick="createTask"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
     />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

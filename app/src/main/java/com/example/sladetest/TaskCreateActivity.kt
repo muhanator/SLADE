@@ -144,6 +144,11 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                     currentDay = mDay
                     currentYear = mYear
                     currentMonth = mMonth + 1
+
+                    textView2.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    currentDay = mDay
+                    currentYear = mYear
+                    currentMonth = mMonth
                 }, year, month, day)
 
                 //show the dialog
@@ -161,23 +166,6 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             startActivity(intent)
         }
     }
-
-
-//    fun createTask(view: View) {
-//        val task = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1, 1)
-//
-//        Toast.makeText(this, "Spinner 1 " + priority_spinner.selectedItem.toString() +
-//                "\nSpinner 2 " + priority_spinner.selectedItem.toString(), Toast.LENGTH_LONG).show()
-//    }
-
-//    override fun onBackPressed() {
-//        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-//        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-//            drawerLayout.closeDrawer(GravityCompat.START)
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

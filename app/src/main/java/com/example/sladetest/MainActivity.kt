@@ -90,12 +90,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 //layout pass, which can get you into infinite loops if you ever
                 //modify the layout from within this method.
                 content.viewTreeObserver.removeGlobalOnLayoutListener(this)
-
                 //Now you can get the width and height from content
 
-                TaskManager.updateTodayView(2019, 8, 13, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
-
-
+                TaskManager.updateTodayView(2019, 8, 14, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
             }
         })
 
