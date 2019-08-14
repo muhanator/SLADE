@@ -18,142 +18,192 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="105dp"
             android:layout_marginStart="105dp" android:layout_marginEnd="106dp" android:layout_marginRight="106dp"
             app:layout_constraintEnd_toEndOf="parent"/>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
 
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="700dp" android:layout_width="wrap_content">
-        <TableLayout
-                android:stretchColumns="*"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="150dp" android:layout_marginLeft="50dp" android:layout_marginStart="50dp"
-                android:layout_marginRight="50dp" android:layout_marginEnd="50dp">
-
-            <TableRow android:layout_width="0dp" android:layout_height="80dp"
-                      android:background="@drawable/table_border">
-
-                <TextView
-                        android:id="@+id/task_description_text_title"
-                        android:text="@string/task_description"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_description"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"/>
-
-                <TextView
-                        android:id="@+id/task_description_text"
-                        android:text="@string/task_description"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_description"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"/>
-
-            </TableRow>
-            <TableRow android:layout_width="0dp" android:layout_height="80dp"
-                      android:background="@drawable/table_border">
-
-                <TextView
-                        android:id="@+id/task_priority_text_title"
-                        android:text="@string/task_priority"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_priority"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
+                <Button
+                        android:text="@string/delete_task_button"
+                        android:layout_width="120dp"
+                        android:layout_height="60dp" android:id="@+id/delete_task_button"
+                        tools:layout_conversion_absoluteHeight="48dp"
+                        tools:layout_conversion_absoluteWidth="259dp"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                <Button
+                        android:text="@string/edit_task_button"
+                        android:layout_width="120dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/edit_task_button"
+                        tools:layout_conversion_absoluteHeight="48dp"
+                        tools:layout_conversion_absoluteWidth="92dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:id="@+id/guideline2"
+                                                            app:layout_constraintGuide_begin="20dp"
+                                                            android:orientation="vertical"
+                                                            app:layout_constraintGuide_percent="0.5"/>
+                <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:id="@+id/guideline4"
+                                                            app:layout_constraintGuide_begin="20dp"
+                                                            android:orientation="vertical"
+                                                            app:layout_constraintGuide_percent="0"
                 />
-
-                <TextView
-                        android:id="@+id/task_priority_text"
-                        android:text="@string/task_priority"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_priority"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
+                <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:id="@+id/guideline5"
+                                                            app:layout_constraintGuide_begin="20dp"
+                                                            android:orientation="vertical"
+                                                            app:layout_constraintGuide_percent="1"
                 />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TableLayout
+                    android:stretchColumns="*"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp" android:layout_marginRight="30dp" android:layout_marginEnd="30dp">
 
-            </TableRow>
-            <TableRow android:layout_width="0dp" android:layout_height="80dp"
-                      android:background="@drawable/table_border">
+                <TableRow android:layout_width="0dp" android:layout_height="80dp"
+                          android:background="@drawable/table_border">
 
-                <TextView
-                        android:id="@+id/task_date_title"
-                        android:text="@string/task_date_title"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_date_title"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                />
+                    <TextView
+                            android:id="@+id/task_description_text_title"
+                            android:text="@string/task_description"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_description"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="10dp"/>
 
-                <TextView
-                        android:id="@+id/task_date"
-                        android:text="@string/task_date"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_date"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                />
+                    <TextView
+                            android:id="@+id/task_description_text"
+                            android:text="@string/task_description"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_description"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"/>
 
-            </TableRow>
-            <TableRow android:layout_width="0dp" android:layout_height="80dp"
-                      android:background="@drawable/table_border">
+                </TableRow>
+                <TableRow android:layout_width="0dp" android:layout_height="80dp"
+                          android:background="@drawable/table_border">
 
-                <TextView
-                        android:id="@+id/task_start_time_text_title"
-                        android:text="@string/task_start_time_title"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_start_time_title"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"/>
+                    <TextView
+                            android:id="@+id/task_priority_text_title"
+                            android:text="@string/task_priority"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_priority"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="10dp"
+                    />
 
-                <TextView
-                        android:id="@+id/task_start_time_text"
-                        android:text="@string/task_time"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_time"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                />
-            </TableRow>
-            <TableRow android:layout_width="0dp" android:layout_height="80dp"
-                      android:background="@drawable/table_border">
+                    <TextView
+                            android:id="@+id/task_priority_text"
+                            android:text="@string/task_priority"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_priority"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                    />
 
-                <TextView
-                        android:id="@+id/task_end_time_text_title"
-                        android:text="@string/task_end_time_title"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_end_time_title"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"/>
+                </TableRow>
+                <TableRow android:layout_width="0dp" android:layout_height="80dp"
+                          android:background="@drawable/table_border">
 
-                <TextView
-                        android:id="@+id/task_end_time_text"
-                        android:text="@string/task_time"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/task_time"
-                        android:textSize="25sp" android:textColor="#FFFFFF"
-                        android:layout_width="0dp"
-                />
-            </TableRow>
-        </TableLayout>
-        <Button
-                android:text="@string/edit_task_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_task_button" android:layout_marginTop="50dp"/>
-    </LinearLayout>
+                    <TextView
+                            android:id="@+id/task_date_title"
+                            android:text="@string/task_date_title"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_date_title"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="10dp"
+                    />
+
+                    <TextView
+                            android:id="@+id/task_date"
+                            android:text="@string/task_date"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_date"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                    />
+
+                </TableRow>
+                <TableRow android:layout_width="0dp" android:layout_height="80dp"
+                          android:background="@drawable/table_border">
+
+                    <TextView
+                            android:id="@+id/task_start_time_text_title"
+                            android:text="@string/task_start_time_title"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_start_time_title"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                            android:id="@+id/task_start_time_text"
+                            android:text="@string/task_time"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_time"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                    />
+                </TableRow>
+                <TableRow android:layout_width="0dp" android:layout_height="80dp"
+                          android:background="@drawable/table_border">
+
+                    <TextView
+                            android:id="@+id/task_end_time_text_title"
+                            android:text="@string/task_end_time_title"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_end_time_title"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                            android:id="@+id/task_end_time_text"
+                            android:text="@string/task_time"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/task_time"
+                            android:textSize="25sp" android:textColor="#FFFFFF"
+                            android:layout_width="0dp"
+                    />
+                </TableRow>
+            </TableLayout>
+            <TextView
+                    android:text="@string/complete_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView6" android:layout_marginTop="50dp"
+                    android:layout_gravity="center_horizontal" android:textColor="#FFFFFF" android:textSize="24sp"/>
+            <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="51dp"
+                    android:id="@+id/completion_switch"
+                    android:switchMinWidth="300dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="250dp"/>
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
