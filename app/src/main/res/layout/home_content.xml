@@ -70,10 +70,13 @@
                             android:layout_marginBottom="20dp"
                     />
 
+                </TableRow>
+
                 <TableRow android:layout_width="169dp" android:layout_height="80dp"
                           android:background="@drawable/table_border"
                           android:minHeight="80dp" android:id="@+id/tableRow_12am">
-                <TextView
+
+                    <TextView
                             android:paddingStart="5dp"
                             android:paddingEnd="5dp"
                             android:paddingLeft="5dp"

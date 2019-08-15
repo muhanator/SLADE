@@ -146,9 +146,6 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                     currentMonth = mMonth + 1
 
                     textView2.setText("" + mDay + "/" + mMonth + "/" + mYear)
-                    currentDay = mDay
-                    currentYear = mYear
-                    currentMonth = mMonth
                 }, year, month, day)
 
                 //show the dialog
