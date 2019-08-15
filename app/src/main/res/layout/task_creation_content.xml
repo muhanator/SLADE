@@ -6,8 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
-        tools:context=".MainActivity">
+        android:id="@+id/create_task_layout"
+        tools:context=".TaskCreateActivity">
 
     <ImageView
             android:layout_width="wrap_content"
@@ -21,15 +21,53 @@
 
     <TextView
             android:text="@string/create_a_task"
-            android:layout_width="0dp"
+            android:layout_width="211dp"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
             android:textSize="32sp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="100dp" android:layout_marginStart="100dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="100dp" android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/imageView2" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp"/>
+    <EditText
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_description_text"
+            tools:text="@string/task_description" android:textSize="28sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView2" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="150dp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_time_popup"
+            android:text="Set Date and Time"
+            app:layout_constraintStart_toEndOf="@+id/imageView2" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="283dp"/>
+    <Spinner
+            android:id="@+id/priority_spinner"
+            android:layout_width="274dp"
+            android:layout_height="36dp"
+            android:background="@color/white"
+            android:prompt="@string/priority_prompt"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            android:spinnerMode="dropdown"
+            android:entries="@array/priority_list"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="396dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2" app:layout_constraintVertical_bias="0.0"/>
 
-
+    <Button
+            android:id="@+id/create_task_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="616dp"
+            android:text= "Finish Creating Task"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

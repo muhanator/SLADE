@@ -45,7 +45,7 @@ object TaskManager{
     }
 
     //TODO: Task-14: This function will have to get called when after you have input the values to create a task
-    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int, taskID: Int): Task{
+    fun createTask(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: String, taskID: Int): Task{
 
         val task = Task(taskYear, taskMonth, taskDay, taskStartHour, taskStartMinute, taskEndHour, taskEndMinute, taskPriority, taskID)
 
@@ -72,10 +72,10 @@ object TaskManager{
         taskButton.layoutParams = params
 
         //Set the buttons's background, and text description
-        if(task.priority == 1)taskButton.setBackgroundResource(R.drawable.task_icon_priority1)
-        if(task.priority == 2)taskButton.setBackgroundResource(R.drawable.task_icon_priority2)
-        if(task.priority == 3)taskButton.setBackgroundResource(R.drawable.task_icon_priority3)
-        if(task.priority == 4)taskButton.setBackgroundResource(R.drawable.task_icon_priority4)
+        if(task.priority.contains("1"))taskButton.setBackgroundResource(R.drawable.task_icon_priority1)
+        if(task.priority.contains("2"))taskButton.setBackgroundResource(R.drawable.task_icon_priority2)
+        if(task.priority.contains("3"))taskButton.setBackgroundResource(R.drawable.task_icon_priority3)
+        if(task.priority.contains("4"))taskButton.setBackgroundResource(R.drawable.task_icon_priority4)
         taskButton.text = description
         taskButton.setPadding(dpToPx(15.0),dpToPx(10.0),dpToPx(5.0), dpToPx(15.0))
 

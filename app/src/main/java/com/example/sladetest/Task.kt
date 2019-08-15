@@ -6,7 +6,7 @@ import android.widget.*
 import java.io.Serializable
 
 
-class Task(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: Int, taskID: Int): Serializable{
+class Task(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, taskStartMinute: Int, taskEndHour: Int, taskEndMinute: Int, taskPriority: String, taskID: Int): Serializable{
 
     var year        : Int
     var month       : Int
@@ -15,7 +15,7 @@ class Task(taskYear: Int, taskMonth: Int, taskDay: Int, taskStartHour: Int, task
     var startMinute : Int
     var endHour     : Int
     var endMinute   : Int
-    var priority    : Int
+    var priority    : String
     var nbOfCollisions   : Int
     var status      : Int
     var id          : Int
