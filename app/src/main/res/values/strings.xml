@@ -1,3 +1,6 @@
+<!--
+This xml file defines the string objects we can use to store info
+/-->
 <resources>
     <string name="app_name">SladeTest</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -24,8 +27,57 @@
     <string name="moves_the_timetable_indicator">Moves the timetable indicator</string>
 
     <string name="time_12_AM">12 AM</string>
+    <string name="time_1_AM">1 AM</string>
+    <string name="time_2_AM">2 AM</string>
+    <string name="time_3_AM">3 AM</string>
+    <string name="time_4_AM">4 AM</string>
+    <string name="time_5_AM">5 AM</string>
+    <string name="time_6_AM">6 AM</string>
+    <string name="time_7_AM">7 AM</string>
+    <string name="time_8_AM">8 AM</string>
+    <string name="time_9_AM">9 AM</string>
+    <string name="time_10_AM">10 AM</string>
+    <string name="time_11_AM">11 AM</string>
+    <string name="time_12_PM">12 PM</string>
+    <string name="time_1_PM">1 PM</string>
+    <string name="time_2_PM">2 PM</string>
+    <string name="time_3_PM">3 PM</string>
+    <string name="time_4_PM">4 PM</string>
+    <string name="time_5_PM">5 PM</string>
+    <string name="time_6_PM">6 PM</string>
+    <string name="time_7_PM">7 PM</string>
+    <string name="time_8_PM">8 PM</string>
+    <string name="time_9_PM">9 PM</string>
+    <string name="time_10_PM">10 PM</string>
+    <string name="time_11_PM">11 PM</string>
 
+
+    <string name="task_name">Task Name</string>
     <string name="task_description">Task Description</string>
     <string name="task">Task</string>
+    <!--This is how we concantenate strings-->
+    <string name="start_time">%1$d:%2$d</string>
 
+    <string name="priority_prompt">Select a priority</string>
+
+    <string name="task_start_time_title">Start Time</string>
+    <string name="task_time">%1$d:%2$d</string>
+    <string name="task_end_time_title">End Time</string>
+
+    <string name="task_date_title">Date</string>
+    <string name="task_date">%1$d/%2$d/%3$d</string>
+
+    <string name="task_priority">Priority</string>
+
+    <string name="edit_task_button">Edit Task</string>
+    <string name="delete_task_button">Delete Task</string>
+    <string name="complete_task">Complete Task</string>
+
+    <string-array name="priority_list">
+        <item>1 (Priority Alpha) </item>
+        <item>2 (Prioity Beta) </item>
+        <item>3 (Priority Charlie) </item>
+        <item>4 (Priority Optional) </item>
+        <item>5 (Priority meh) </item>
+    </string-array>
 </resources>

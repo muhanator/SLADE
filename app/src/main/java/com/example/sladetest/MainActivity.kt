@@ -1,19 +1,20 @@
 package com.example.sladetest
 
 
+import android.content.Context
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
-import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
 import android.content.Intent
-import android.view.View
+import android.content.res.Resources
+import android.graphics.Color
+import android.view.*
 import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
@@ -22,18 +23,35 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    companion object{
-        //Declare Global Constants here
-
-        val TABLE_ROW_HEIGHT = 40
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Playing around with the clock:
+//        var tvw = findViewById<TextView>(R.id.textView1)
+//        var picker = findViewById<TimePicker>(R.id.timePicker1)
+//        picker.setIs24HourView(true)
+//        var btnGet = findViewById<Button>(R.id.button1)
+//        btnGet.setOnClickListener {
+//            var hour: Int
+//            var minute: Int
+//            val am_pm: String
+//            hour = picker.hour
+//            minute = picker.minute
+//
+//            if (hour > 12) {
+//                am_pm = "PM"
+//                hour -= 12
+//            } else {
+//                am_pm = "AM"
+//            }
+//            tvw.text = "Selected Date: $hour:$minute $am_pm"
+//        }
+
+
+        // Initialize the task manager
+        TaskManager.init(resources.displayMetrics.density)
 
         //Below, we instantiate a calender to get the current date to display at the top of the page
         val calendar      = Calendar.getInstance()
@@ -59,34 +77,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         //Below, we update the schedule view with all of the tasks for the given day
+        val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
+        val timeTableRow = findViewById<TableRow>(R.id.tableRow_12am)
 
-        val frameLayout = findViewById<FrameLayout>(R.id.schedule_frame_layout)
-        val taskManager = TaskManager(111, resources.displayMetrics.density)
-        val task        = taskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1)
-        val task2       = taskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2)
-        val task3       = taskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3)
-        val task4       = taskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4)
-        val task5       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1)
-        val task6       = taskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2)
-        task.setTaskDescription("This task was made created using task manager")
-        task2.setTaskDescription("This task2 was made created using task manager")
-        task3.setTaskDescription("This task3 was made created using task manager")
-        task4.setTaskDescription("This task4 was made created using task manager")
-        taskManager.updateTodayView(2019, 7, 25, frameLayout, this)
 
+
+
+        val content = findViewById<View>(android.R.id.content)
+        content.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                //Remove it here unless you want to get this callback for EVERY
+                //layout pass, which can get you into infinite loops if you ever
+                //modify the layout from within this method.
+                content.viewTreeObserver.removeGlobalOnLayoutListener(this)
+                //Now you can get the width and height from content
+
+                TaskManager.updateTodayView(2019, 8, 14, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
+            }
+        })
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
+        val fab: FloatingActionButton = findViewById(R.id.create_task_plus_button)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
 
             intent = Intent(this, TaskCreateActivity::class.java)
             startActivity(intent)
-            finish()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -131,17 +151,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
-
+                intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.nav_tools -> {
-
+1
             }
             R.id.nav_share -> {
+//                val task        = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1  , 1)
+//                val task2       = TaskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2  , 2)
+//                val task3       = TaskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3, 3)
+//                val task4       = TaskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4  , 4)
+//                val task5       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 5)
+//                val task6       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 6)
+//                val task7       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 7)
+//                val task8       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 8)
+//                val task9       = TaskManager.createTask(2019, 7, 25, 5 , 0, 6 , 0, 2  , 9)
+//                val task10      = TaskManager.createTask(2019, 7, 25, 0 , 0, 1 , 0, 2  , 10)
+//                task.setTaskDescription("This task was made created using task manager")
+//                task2.setTaskDescription("This task2 was made created using task manager")
+//                task3.setTaskDescription("This task3 was made created using task manager")
+//                task4.setTaskDescription("This task4 was made created using task manager")
 
             }
             R.id.nav_send -> {

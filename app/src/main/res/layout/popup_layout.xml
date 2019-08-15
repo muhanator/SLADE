@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:id="@+id/linear_layout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="#c7bf98"
+              android:padding="20dp">
+
+    <TextView
+            android:id="@+id/text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click me to change my text color"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+    />
+    <Button
+            android:id="@+id/dismiss"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Dismiss" />
+
+    <TimePicker
+            android:id="@+id/start_time_picker"
+            android:timePickerMode="spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible" tools:visibility="visible"/>
+
+    <TimePicker
+            android:id="@+id/end_time_picker"
+            android:timePickerMode="spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible" tools:visibility="visible"/>
+</LinearLayout>

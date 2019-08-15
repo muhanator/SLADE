@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.CalendarView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -15,20 +16,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
-class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendar)
+        setContentView(R.layout.task_edit)
+
+        
 
 
-        //Below, we have access to inputs that occur on the calendar
-        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-            Toast.makeText(this@CalendarActivity, msg, Toast.LENGTH_SHORT).show()
-        }
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -86,6 +82,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 // Handle the camera action
                 intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             }
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
