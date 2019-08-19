@@ -9,6 +9,8 @@ import android.widget.LinearLayout
 import android.view.ViewGroup.LayoutParams
 
 //This class is used to store all the information about each of the tasks
+//We only have 1 instance of it for the whole project, so that is why it is an "Object" and not a "Class"
+//You can think of it as a static class in Java
 object TaskManager{
 
     var density = 0.toFloat()

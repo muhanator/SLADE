@@ -45,7 +45,6 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_creation_content) //setting the background to the task_creation.xml
-        //val currentHour = timePicker.hour
 
         var currentHour = 0
         var currentMinute = 0
@@ -98,7 +97,6 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                     // Change the text color of popup window's text view
                     tv.setTextColor(Color.RED)
                 }
-
 
                 // Set a click listener for popup's button widget
                 buttonPopup.setOnClickListener{
