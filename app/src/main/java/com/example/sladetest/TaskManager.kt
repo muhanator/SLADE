@@ -68,7 +68,7 @@ object TaskManager{
 
         //Create the size, and layout parameters of the button
         val params = LinearLayout.LayoutParams(taskButtonWidth,((task.endHour-task.startHour + (task.endMinute/60.0 - task.startMinute/60.0))*rowHeight).toInt())     //Create button dimensions depending on task length
-        params.setMargins(0, dpToPx((task.startHour + (task.startMinute/60.0))*80.0)- TABLE_BORDER_THICKNESS, 0, 0)
+        params.setMargins(0, ((task.startHour + (task.startMinute/60.0))* rowHeight).toInt()- TABLE_BORDER_THICKNESS, 0, 0)
         taskButton.layoutParams = params
 
         //Set the buttons's background, and text description

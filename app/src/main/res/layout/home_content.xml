@@ -31,10 +31,10 @@
                     android:layout_height="match_parent"
                     android:showDividers="middle|beginning|end" android:paddingLeft="20dp"
                     android:paddingRight="20dp"
-                    android:stretchColumns="*"
-                    android:shrinkColumns="*" android:id="@+id/task_timeTable">
 
-                <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp">
+                    android:id="@+id/task_timeTable">
+
+                <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp" android:id="@+id/tableRow_date">
 
                     <TextView
                             android:text="@string/today"
@@ -46,7 +46,7 @@
                     />
 
                 </TableRow>
-                <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp">
+                <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp" android:id="@+id/tableRow_progressText">
 
                     <TextView
                             android:text="@string/today_s_progress"
@@ -60,7 +60,7 @@
                             android:layout_marginTop="10dp"/>
 
                 </TableRow>
-                <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp">
+                <TableRow android:layout_width="match_parent" android:layout_height="40dp" android:minHeight="40dp" android:id="@+id/tableRow_progressBar">
 
                     <ProgressBar
                             style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
@@ -72,7 +72,7 @@
 
                 </TableRow>
 
-                <TableRow android:layout_width="169dp" android:layout_height="80dp"
+                <TableRow android:layout_width="match_parent" android:layout_height="80dp"
                           android:background="@drawable/table_border"
                           android:minHeight="80dp" android:id="@+id/tableRow_12am">
 

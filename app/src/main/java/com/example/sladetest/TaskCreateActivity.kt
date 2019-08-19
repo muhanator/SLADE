@@ -133,7 +133,7 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 priority_spinner.adapter = adapter
                 priority = priority_spinner.selectedItem.toString()
 
-                //calender
+                // Calender
                 val c = Calendar.getInstance()
                 val year = c.get(Calendar.YEAR)
                 val month = c.get(Calendar.MONTH)
