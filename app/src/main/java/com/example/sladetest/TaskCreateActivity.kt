@@ -45,7 +45,6 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_creation_content) //setting the background to the task_creation.xml
-        //val currentHour = timePicker.hour
 
         var currentHour = 0
         var currentMinute = 0
@@ -98,7 +97,6 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                     // Change the text color of popup window's text view
                     tv.setTextColor(Color.RED)
                 }
-
 
                 // Set a click listener for popup's button widget
                 buttonPopup.setOnClickListener{
@@ -158,10 +156,14 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         createTaskButton.setOnClickListener{
             //This is where we create our task
 
-            val task = TaskManager.createTask(currentYear, currentMonth, currentDay, currentHour, currentMinute, endHour, endMinute, priority, id++)
+            val task = TaskManager.createTask(currentYear, currentMonth, currentDay, currentHour, currentMinute, endHour, endMinute, getPriority(), id++)
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun getPriority():String{
+        return priority_spinner.selectedItem.toString()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
