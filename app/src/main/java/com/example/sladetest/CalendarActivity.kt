@@ -26,8 +26,17 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
         calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
             // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-            Toast.makeText(this@CalendarActivity, msg, Toast.LENGTH_SHORT).show()
+
+            intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("day", dayOfMonth)
+            intent.putExtra("month", month)
+            intent.putExtra("year", year)
+            startActivity(intent)
+
+
+
+            //val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
+            //Toast.makeText(this@CalendarActivity, msg, Toast.LENGTH_SHORT).show()
         }
 
         //Below, we initialize the action toolbar
