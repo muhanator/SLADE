@@ -23,6 +23,11 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    val calendar = Calendar.getInstance()
+    var year : Int? = 0
+    var month: Int? = 0
+    var day  : Int? = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
         super.onCreate(savedInstanceState)
@@ -53,11 +58,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Initialize the task manager
         TaskManager.init(resources.displayMetrics.density)
 
-        //Below, we instantiate a calender to get the current date to display at the top of the page
-        val calendar      = Calendar.getInstance()
-        val currentDate   = DateFormat.getDateInstance().format(calendar.time)
-        val textViewDate  = findViewById<TextView>(R.id.textView2)
-        textViewDate.text = currentDate
+        // Initialize the date for the today view. If this is upon app launch, the date will be set to today's date.
+        // If the activity is being called from CalendarActivity, it will use the given date which is not necessarily today's.
+        initializeDate()
 
 
         //Below, we initialize the progress bar
@@ -92,7 +95,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 content.viewTreeObserver.removeGlobalOnLayoutListener(this)
                 //Now you can get the width and height from content
 
-                TaskManager.updateTodayView(2019, 8, 14, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
+                TaskManager.updateTodayView(year!!, month!!, day!!, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
             }
         })
 
@@ -120,6 +123,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
+    }
+
+    fun initializeDate(){
+
+        //Below, we instantiate a calender to get the current date to display at the top of the page
+        year  = intent.extras?.getInt("year")
+        month = intent.extras?.getInt("month")
+        day   = intent.extras?.getInt("day")
+
+        if(year == null && month == null && day == null) {
+            // If no date was passed to the main activity, set it to the current date
+            year  = calendar.get(Calendar.YEAR)
+            month = calendar.get(Calendar.MONTH) + 1    // Months are zero-indexed in Calendar API
+            day   = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val currentDate   = DateFormat.getDateInstance().format(calendar.time)
+            val textViewDate  = findViewById<TextView>(R.id.textView2)
+            textViewDate.text = currentDate
+        }
+        else{
+            // If a date was passed to the main activity, set the schedule date to that date
+            calendar.set(Calendar.DAY_OF_MONTH, day!!)
+            calendar.set(Calendar.MONTH       , month!!)
+            calendar.set(Calendar.YEAR        , year!!)
+
+            val currentDate   = DateFormat.getDateInstance().format(calendar.time)
+            val textViewDate  = findViewById<TextView>(R.id.textView2)
+            textViewDate.text = currentDate
+
+            month = month!! + 1     // The month will have to be incremented here, since in it has not been already if we end up in this else statement
+        }
     }
 
     override fun onBackPressed() {
@@ -162,20 +196,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 1
             }
             R.id.nav_share -> {
-//                val task        = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, 1  , 1)
-//                val task2       = TaskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, 2  , 2)
-//                val task3       = TaskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, 3, 3)
-//                val task4       = TaskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, 4  , 4)
-//                val task5       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 5)
-//                val task6       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 6)
-//                val task7       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 1  , 7)
-//                val task8       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, 2  , 8)
-//                val task9       = TaskManager.createTask(2019, 7, 25, 5 , 0, 6 , 0, 2  , 9)
-//                val task10      = TaskManager.createTask(2019, 7, 25, 0 , 0, 1 , 0, 2  , 10)
-//                task.setTaskDescription("This task was made created using task manager")
-//                task2.setTaskDescription("This task2 was made created using task manager")
-//                task3.setTaskDescription("This task3 was made created using task manager")
-//                task4.setTaskDescription("This task4 was made created using task manager")
+                val task        = TaskManager.createTask(2019, 8, 19, 20, 0, 22, 0, "1"  , 1)
+                val task2       = TaskManager.createTask(2019, 8, 19, 8 , 0, 10, 0, "2"  , 2)
+                val task3       = TaskManager.createTask(2019, 8, 19, 3 , 15, 6 , 45, "3", 3)
+                val task4       = TaskManager.createTask(2019, 8, 19, 1 , 0, 2 , 0, "4"  , 4)
+                val task5       = TaskManager.createTask(2019, 8, 19, 2 , 0, 4 , 0, "1"  , 5)
+                val task6       = TaskManager.createTask(2019, 8, 19, 2 , 0, 4 , 0, "2"  , 6)
+                val task7       = TaskManager.createTask(2019, 8, 19, 2 , 0, 4 , 0, "1"  , 7)
+                val task8       = TaskManager.createTask(2019, 8, 19, 2 , 0, 4 , 0, "2"  , 8)
+                val task9       = TaskManager.createTask(2019, 8, 19, 5 , 0, 6 , 0, "2"  , 9)
+                val task10      = TaskManager.createTask(2019, 8, 19, 0 , 0, 1 , 0, "2"  , 10)
+                task.setTaskDescription("This task was made created using task manager")
+                task2.setTaskDescription("This task2 was made created using task manager")
+                task3.setTaskDescription("This task3 was made created using task manager")
+                task4.setTaskDescription("This task4 was made created using task manager")
 
             }
             R.id.nav_send -> {
