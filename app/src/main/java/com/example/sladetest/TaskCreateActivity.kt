@@ -156,10 +156,14 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         createTaskButton.setOnClickListener{
             //This is where we create our task
 
-            val task = TaskManager.createTask(currentYear, currentMonth, currentDay, currentHour, currentMinute, endHour, endMinute, priority, id++)
+            val task = TaskManager.createTask(currentYear, currentMonth, currentDay, currentHour, currentMinute, endHour, endMinute, getPriority(), id++)
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun getPriority():String{
+        return priority_spinner.selectedItem.toString()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
