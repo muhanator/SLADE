@@ -29,6 +29,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private var mScaleFactor = 1f   // This variable is used when the user pinches the screen
 
+    val scaleListener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            mScaleFactor *= detector.scaleFactor
+
+            // Don't let the object get too small or too large.
+            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f))
+
+            tableRowHeight = (tableRowHeight * mScaleFactor).toInt()
+            //invalidate()
+            return true
+        }
+
+        override fun onScaleEnd(detector: ScaleGestureDetector) {
+
+            val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
+            TaskManager.updateTodayView(
+                year!!,
+                month!!,
+                day!!,
+                frameLayout,
+                dpToPx(tableRowHeight.toDouble()),
+                this@MainActivity
+            )
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
@@ -46,23 +72,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Initialize Pinch to Zoom. This allows the user to dynamically resize the table row height, so that shorter tasks can be viewed.
         initializePinchToZoom()
 
-        val scaleListener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
-
-            override fun onScale(detector: ScaleGestureDetector): Boolean {
-                mScaleFactor *= detector.scaleFactor
-
-                // Don't let the object get too small or too large.
-                mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f))
-
-                //invalidate()
-                return true
-            }
-            override fun onScaleEnd(detector: ScaleGestureDetector) {
-
-                val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
-                TaskManager.updateTodayView(year!!, month!!, day!!, frameLayout, dpToPx(tableRowHeight.toDouble()), this@MainActivity)
-            }
-        }
 
 
         //Below, we initialize the progress bar
@@ -194,13 +203,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-
-        scaleListener.onTouchEvent(event)
-
-        return super.onTouchEvent(event)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
