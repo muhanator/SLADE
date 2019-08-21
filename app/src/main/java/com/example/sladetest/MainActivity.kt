@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var year : Int? = 0
     var month: Int? = 0
     var day  : Int? = 0
-    private var tableRowHeight = 80
+    private var tableRowHeight = 170
+
+    private var mScaleFactor = 1f   // This variable is used when the user pinches the screen
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Initialize the date for the today view. If this is upon app launch, the date will be set to today's date.
         // If the activity is being called from CalendarActivity, it will use the given date which is not necessarily today's.
         initializeDate()
+
+        // Initialize Pinch to Zoom. This allows the user to dynamically resize the table row height, so that shorter tasks can be viewed.
+        initializePinchToZoom()
+
+        val scaleListener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                mScaleFactor *= detector.scaleFactor
+
+                // Don't let the object get too small or too large.
+                mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f))
+
+                //invalidate()
+                return true
+            }
+            override fun onScaleEnd(detector: ScaleGestureDetector) {
+
+                val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
+                TaskManager.updateTodayView(year!!, month!!, day!!, frameLayout, dpToPx(tableRowHeight.toDouble()), this@MainActivity)
+            }
+        }
+
 
         //Below, we initialize the progress bar
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
@@ -68,14 +92,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
-
-        /*
-         android:layout_width="169dp" android:layout_height="80dp"
-         android:background="@drawable/table_border"
-         android:minHeight="80dp" android:id="@+id/tableRow_12am"
-        */
-
         val content = findViewById<View>(android.R.id.content)
+
         content.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 //Remove it here unless you want to get this callback for EVERY
@@ -117,23 +135,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    fun initializePinchToZoom() {
 
-
-
-    //Below, we initialize pinch-to-zoom
-    private var mScaleFactor = 1f
-
-    private val scaleListener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
-
-        override fun onScale(detector: ScaleGestureDetector): Boolean {
-            mScaleFactor *= detector.scaleFactor
-
-            // Don't let the object get too small or too large.
-            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f))
-
-            //invalidate()
-            return true
-        }
     }
 
     fun initializeDate(){
@@ -167,6 +170,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -190,6 +194,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        scaleListener.onTouchEvent(event)
+
+        return super.onTouchEvent(event)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
