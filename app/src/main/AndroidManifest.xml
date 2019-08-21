@@ -50,7 +50,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity
                 android:name=".TaskEditActivity"
                 android:label="SladeTest"
@@ -61,9 +60,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-=======
 
->>>>>>> 41e72478275d4f317a85f88625cafad73346879b
         <activity
                 android:name=".SettingsActivity"
                 android:label="@string/app_name"
