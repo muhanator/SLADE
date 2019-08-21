@@ -119,4 +119,5 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         return (size * scale + 0.5f).toInt()
     }
+
 }
