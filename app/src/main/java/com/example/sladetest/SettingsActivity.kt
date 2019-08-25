@@ -39,14 +39,7 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         setContentView(R.layout.activity_settings)
 
-
-        this.setTheme(R.style. DarkMode_AppTheme)
-
-        // Initialize the colors, depending on the color mode (normal, dark mode, etc)
-        // initializeColors()
-
-
-
+        
         //Below, we initialize the Night Mode Switch
         val nightModeSwitch = findViewById<Switch>(R.id.switch1)
 

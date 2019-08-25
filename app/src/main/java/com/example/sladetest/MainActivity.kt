@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initializeTheme()
 
         setContentView(R.layout.activity_main)
-        
+
         // Initialize the task manager
         TaskManager.init(resources.displayMetrics.density)
 
