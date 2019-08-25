@@ -17,21 +17,55 @@ import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
 import java.util.*
+import android.widget.CompoundButton
+import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.EditText
+import android.view.LayoutInflater
+
+
 
 
 class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    companion object{
-        //Declare Global Constants here
-
-        val TABLE_ROW_HEIGHT = 40
-    }
+    private var currentTheme = SettingsData.colorMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
 
         super.onCreate(savedInstanceState)
+
+        // Below, we initialize the theme, which will determine the colors of the app
+        initializeTheme()
+
         setContentView(R.layout.activity_settings)
+
+
+        this.setTheme(R.style. DarkMode_AppTheme)
+
+        // Initialize the colors, depending on the color mode (normal, dark mode, etc)
+        // initializeColors()
+
+
+
+        //Below, we initialize the Night Mode Switch
+        val nightModeSwitch = findViewById<Switch>(R.id.switch1)
+
+        if(SettingsData.colorMode == 1) nightModeSwitch.isChecked = true    // This line of code ie needed to remember the state of the swtich
+
+        nightModeSwitch.setOnCheckedChangeListener{ buttonView, isChecked ->
+
+            if(isChecked){
+                SettingsData.colorMode = 1
+            }
+            else{
+                SettingsData.colorMode = 0
+            }
+
+            // Below, we initialize the theme, which will determine the colors of the app
+            initializeTheme()
+            recreate()          // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
+        }
+
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -60,6 +94,40 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     }
 
+
+    private fun initializeColors(){
+
+        val mainBackground = findViewById<ConstraintLayout>(R.id.background)
+        val secondBackground = findViewById<ImageView>(R.id.imageView2)
+        val toolbar          = findViewById<Toolbar>(R.id.toolbar)
+        val darkModeSwitch = findViewById<Switch>(R.id.switch1)
+
+
+        val factory = layoutInflater
+        val navView = factory.inflate(R.layout.nav_header_main, null)
+        val navViewHeader = navView.findViewById(R.id.nav_view_header) as LinearLayout
+
+
+        if(SettingsData.colorMode == 0) {   // Standard Theme
+            mainBackground.setBackgroundColor(resources.getColor(R.color.background))
+            secondBackground.setBackgroundResource(R.drawable.title_rect)
+            toolbar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            this.window.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
+            darkModeSwitch.setTextColor(resources.getColor(R.color.black))
+            navViewHeader.setBackgroundResource(R.drawable.side_nav_bar)
+
+        }
+        if(SettingsData.colorMode == 1) {   // Dark Mode
+            mainBackground.setBackgroundColor(resources.getColor(R.color.darkMode_background))
+            secondBackground.setBackgroundResource(R.drawable.dark_mode_title_rect)
+            toolbar.setBackgroundColor(resources.getColor(R.color.darkMode_background))
+            this.window.statusBarColor = resources.getColor(R.color.darkMode_background)
+            darkModeSwitch.setTextColor(resources.getColor(R.color.white))
+            navViewHeader.setBackgroundResource(R.drawable.dark_mode_side_nav_bar)
+        }
+
+    }
+
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -72,6 +140,7 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         //menuInflater.inflate(R.menu.main, menu)
+
         return true
     }
 
@@ -113,11 +182,34 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         return true
     }
 
+    override fun onResume() {
+
+        super.onResume()
+
+        val theme = SettingsData.colorMode
+
+        if(theme != currentTheme) {
+            // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
+            recreate()
+        }
+    }
+
     private fun dpToPx(size : Double): Int{
 
         val scale = resources.displayMetrics.density
 
         return (size * scale + 0.5f).toInt()
+    }
+
+    private fun initializeTheme(){
+
+        // Below, we set the theme of the app depending on user settings
+        if(SettingsData.colorMode == 1) {
+            setTheme(R.style.DarkMode_AppTheme)
+        }
+        else{
+            setTheme(R.style.AppTheme)
+        }
     }
 
 }

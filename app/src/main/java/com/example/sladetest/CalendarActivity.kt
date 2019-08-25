@@ -17,10 +17,18 @@ import com.google.android.material.snackbar.Snackbar
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private var currentTheme = SettingsData.colorMode
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Below, we initialize the theme, which will determine the colors of the app
+        initializeTheme()
+
         setContentView(R.layout.activity_calendar)
 
+        // Below, we initialize the theme, which will determine the colors of the app
+        initializeTheme()
 
         //Below, we have access to inputs that occur on the calendar
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
@@ -113,6 +121,29 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onResume() {
+
+        super.onResume()
+
+        val theme = SettingsData.colorMode
+
+        if(theme != currentTheme) {
+            // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
+            recreate()
+        }
+    }
+
+    private fun initializeTheme(){
+
+        // Below, we set the theme of the app depending on user settings
+        if(SettingsData.colorMode == 1) {
+            setTheme(R.style.DarkMode_AppTheme)
+        }
+        else{
+            setTheme(R.style.AppTheme)
+        }
     }
 
 }

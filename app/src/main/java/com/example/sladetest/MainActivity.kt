@@ -18,6 +18,7 @@ import android.view.*
 import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import java.util.*
 import java.time.LocalDate
 
@@ -28,11 +29,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var year : Int? = 0
     var month: Int? = 0
     var day  : Int? = 0
+    private var currentTheme = SettingsData.colorMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
         super.onCreate(savedInstanceState)
+
+        // Below, we initialize the theme, which will determine the colors of the app
+        initializeTheme()
+
         setContentView(R.layout.activity_main)
+
+
+        // Initialize the colors, depending on the color mode (normal, dark mode, etc)
+        //initializeColors()
+
 
         // Initialize the task manager
         TaskManager.init(resources.displayMetrics.density)
@@ -62,8 +73,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Below, we update the schedule view with all of the tasks for the given day
         val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
         val timeTableRow = findViewById<TableRow>(R.id.tableRow_12am)
-
-
 
 
         val content = findViewById<View>(android.R.id.content)
@@ -102,11 +111,48 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setNavigationItemSelectedListener(this)
 
+    }
 
+    override fun onResume() {
+
+        super.onResume()
+
+        val theme = SettingsData.colorMode
+
+        if(theme != currentTheme) {
+            // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
+            recreate()
+        }
+    }
+
+    private fun initializeColors(){
+
+        val mainBackground = findViewById<ConstraintLayout>(R.id.linearLayout)
+        val secondBackground = findViewById<ImageView>(R.id.imageView2)
+        val toolbar          = findViewById<Toolbar>(R.id.toolbar)
+
+        val factory = layoutInflater
+        val navView = factory.inflate(R.layout.nav_header_main, null)
+        val navViewHeader = navView.findViewById(R.id.nav_view_header) as LinearLayout
+
+        if(SettingsData.colorMode == 0) {   // Standard Theme
+            mainBackground.setBackgroundColor(resources.getColor(R.color.background))
+            secondBackground.setBackgroundResource(R.drawable.title_rect)
+            toolbar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            this.window.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
+            navViewHeader.setBackground(getDrawable(R.drawable.side_nav_bar))
+        }
+        if(SettingsData.colorMode == 1) {   // Dark Mode
+            mainBackground.setBackgroundColor(resources.getColor(R.color.darkMode_background))
+            secondBackground.setBackgroundResource(R.drawable.dark_mode_title_rect)
+            toolbar.setBackgroundColor(resources.getColor(R.color.darkMode_background))
+            this.window.statusBarColor = resources.getColor(R.color.darkMode_background)
+            navViewHeader.setBackground(getDrawable(R.drawable.dark_mode_side_nav_bar))
+        }
 
     }
 
-    fun initializeDate(){
+    private fun initializeDate(){
 
         //Below, we instantiate a calender to get the current date to display at the top of the page
         year  = intent.extras?.getInt("year")
@@ -180,6 +226,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_share -> {
 
+                val task        = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, "1", 0)
+                val task2       = TaskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, "2",1)
+                val task3       = TaskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, "3", 2)
+                val task4       = TaskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, "4", 3)
+                val task5       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, "1", 4)
+                val task6       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, "2", 5)
+                task.setTaskDescription("This task was made created using task manager")
+                task2.setTaskDescription("This task2 was made created using task manager")
+                task3.setTaskDescription("This task3 was made created using task manager")
+                task4.setTaskDescription("This task4 was made created using task manager")
+
             }
             R.id.nav_send -> {
 
@@ -195,6 +252,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val scale = resources.displayMetrics.density
 
         return (size * scale + 0.5f).toInt()
+    }
+
+    private fun initializeTheme(){
+
+        currentTheme = SettingsData.colorMode
+
+        // Below, we set the theme of the app depending on user settings
+        if(SettingsData.colorMode == 1) {
+            setTheme(R.style.DarkMode_AppTheme)
+        }
+        else{
+            setTheme(R.style.AppTheme)
+        }
     }
 
 

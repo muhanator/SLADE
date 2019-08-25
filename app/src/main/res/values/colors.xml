@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#D89541</color>
     <color name="colorPrimaryDark">#7A6233</color>
-    <color name="colorSecondary">#704E27</color>
+    <color name="background">#FFFFFF</color>
+
+    <color name="darkMode_colorPrimary">#121212</color>
+    <color name="darkMode_colorPrimaryDark">#121212</color>
+    <color name="darkMode_background">#121212</color>
+
     <color name="colorAccent">#D81B60</color>
 
 
@@ -28,5 +34,10 @@
     <color name="white_lowOpacity">#65FFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="icon_shadow">#852B2929</color>
+
+
+
+
+
 
 </resources>
