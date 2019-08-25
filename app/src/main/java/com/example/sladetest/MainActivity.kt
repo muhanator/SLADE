@@ -125,33 +125,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun initializeColors(){
-
-        val mainBackground = findViewById<ConstraintLayout>(R.id.linearLayout)
-        val secondBackground = findViewById<ImageView>(R.id.imageView2)
-        val toolbar          = findViewById<Toolbar>(R.id.toolbar)
-
-        val factory = layoutInflater
-        val navView = factory.inflate(R.layout.nav_header_main, null)
-        val navViewHeader = navView.findViewById(R.id.nav_view_header) as LinearLayout
-
-        if(SettingsData.colorMode == 0) {   // Standard Theme
-            mainBackground.setBackgroundColor(resources.getColor(R.color.background))
-            secondBackground.setBackgroundResource(R.drawable.title_rect)
-            toolbar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            this.window.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
-            navViewHeader.setBackground(getDrawable(R.drawable.side_nav_bar))
-        }
-        if(SettingsData.colorMode == 1) {   // Dark Mode
-            mainBackground.setBackgroundColor(resources.getColor(R.color.darkMode_background))
-            secondBackground.setBackgroundResource(R.drawable.dark_mode_title_rect)
-            toolbar.setBackgroundColor(resources.getColor(R.color.darkMode_background))
-            this.window.statusBarColor = resources.getColor(R.color.darkMode_background)
-            navViewHeader.setBackground(getDrawable(R.drawable.dark_mode_side_nav_bar))
-        }
-
-    }
-
     private fun initializeDate(){
 
         //Below, we instantiate a calender to get the current date to display at the top of the page
