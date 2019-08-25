@@ -93,40 +93,7 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
 
     }
-
-
-    private fun initializeColors(){
-
-        val mainBackground = findViewById<ConstraintLayout>(R.id.background)
-        val secondBackground = findViewById<ImageView>(R.id.imageView2)
-        val toolbar          = findViewById<Toolbar>(R.id.toolbar)
-        val darkModeSwitch = findViewById<Switch>(R.id.switch1)
-
-
-        val factory = layoutInflater
-        val navView = factory.inflate(R.layout.nav_header_main, null)
-        val navViewHeader = navView.findViewById(R.id.nav_view_header) as LinearLayout
-
-
-        if(SettingsData.colorMode == 0) {   // Standard Theme
-            mainBackground.setBackgroundColor(resources.getColor(R.color.background))
-            secondBackground.setBackgroundResource(R.drawable.title_rect)
-            toolbar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            this.window.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
-            darkModeSwitch.setTextColor(resources.getColor(R.color.black))
-            navViewHeader.setBackgroundResource(R.drawable.side_nav_bar)
-
-        }
-        if(SettingsData.colorMode == 1) {   // Dark Mode
-            mainBackground.setBackgroundColor(resources.getColor(R.color.darkMode_background))
-            secondBackground.setBackgroundResource(R.drawable.dark_mode_title_rect)
-            toolbar.setBackgroundColor(resources.getColor(R.color.darkMode_background))
-            this.window.statusBarColor = resources.getColor(R.color.darkMode_background)
-            darkModeSwitch.setTextColor(resources.getColor(R.color.white))
-            navViewHeader.setBackgroundResource(R.drawable.dark_mode_side_nav_bar)
-        }
-
-    }
+    
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
