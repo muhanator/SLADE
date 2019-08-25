@@ -55,6 +55,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val minute                  = calendar.get(Calendar.MINUTE).toDouble()
         val dpHeightInPx            = dpToPx((118 + 80 * (hour + (minute/60.toDouble())))) //calculation: ((start of 12AM row + rowHeight * ( hour + minute/60) )
 
+
+        // Below, we scroll the Today View page down to the current time.
+        val scrollView = findViewById<ScrollView >(R.id.timetable_scrollview)
+
+        scrollView.post(Runnable { scrollView.scrollTo(0, dpHeightInPx) })
+
+
+
+
+
         timetableIndicatorMover.layoutParams.height = dpHeightInPx
         timetableIndicatorMover.visibility          = View.INVISIBLE
 
