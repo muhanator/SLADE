@@ -226,16 +226,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_share -> {
 
-                val task        = TaskManager.createTask(2019, 7, 25, 20, 0, 22, 0, "1", 0)
-                val task2       = TaskManager.createTask(2019, 7, 25, 8 , 0, 10, 0, "2",1)
-                val task3       = TaskManager.createTask(2019, 7, 25, 3 , 15, 6 , 45, "3", 2)
-                val task4       = TaskManager.createTask(2019, 7, 25, 1 , 0, 2 , 0, "4", 3)
-                val task5       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, "1", 4)
-                val task6       = TaskManager.createTask(2019, 7, 25, 2 , 0, 4 , 0, "2", 5)
-                task.setTaskDescription("This task was made created using task manager")
-                task2.setTaskDescription("This task2 was made created using task manager")
-                task3.setTaskDescription("This task3 was made created using task manager")
-                task4.setTaskDescription("This task4 was made created using task manager")
 
             }
             R.id.nav_send -> {

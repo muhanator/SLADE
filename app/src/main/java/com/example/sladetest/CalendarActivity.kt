@@ -27,8 +27,6 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         setContentView(R.layout.activity_calendar)
 
-        // Below, we initialize the theme, which will determine the colors of the app
-        initializeTheme()
 
         //Below, we have access to inputs that occur on the calendar
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
