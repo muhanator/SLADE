@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/create_task_layout"
-        tools:context=".TaskCreateActivity">
+        tools:context=".TaskCreateActivity" android:background="?attr/backgroundColor">
 
     <ImageView
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="616dp"
-            android:text= "Finish Creating Task"
+            android:text="Finish Creating Task"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
     />

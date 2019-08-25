@@ -54,7 +54,12 @@ This xml file defines the string objects we can use to store info
 
     <string name="task_name">Task Name</string>
     <string name="task_description">Task Description</string>
+    <string name="settings_title">Settings</string>
     <string name="task">Task</string>
+
+    <string name="night_mode">Night Mode</string>
+
+
     <!--This is how we concantenate strings-->
     <string name="start_time">%1$d:%2$d</string>
 
@@ -72,6 +77,7 @@ This xml file defines the string objects we can use to store info
     <string name="edit_task_button">Edit Task</string>
     <string name="delete_task_button">Delete Task</string>
     <string name="complete_task">Complete Task</string>
+
 
     <string-array name="priority_list">
         <item>1 (Priority Alpha) </item>
