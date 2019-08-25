@@ -93,7 +93,7 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
 
     }
-    
+
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

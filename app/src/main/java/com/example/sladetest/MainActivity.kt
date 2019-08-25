@@ -39,12 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initializeTheme()
 
         setContentView(R.layout.activity_main)
-
-
-        // Initialize the colors, depending on the color mode (normal, dark mode, etc)
-        //initializeColors()
-
-
+        
         // Initialize the task manager
         TaskManager.init(resources.displayMetrics.density)
 
