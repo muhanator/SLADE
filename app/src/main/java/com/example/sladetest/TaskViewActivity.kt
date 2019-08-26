@@ -41,6 +41,11 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         val taskMonth       = task.getMonth()
         val taskDay         = task.getDay()
         val taskPriority    = task.getPriority()
+        var priorityPosition = 0
+        if(taskPriority.contains("1")) priorityPosition = 0
+        if(taskPriority.contains("2")) priorityPosition = 1
+        if(taskPriority.contains("3")) priorityPosition = 2
+        if(taskPriority.contains("4")) priorityPosition = 3
 
         //Below, we initialize the task information
         val taskDescriptionTextBox = findViewById<TextView>(R.id.task_description_text)
@@ -71,6 +76,7 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             intent.putExtra("currentDay", taskDay)
             intent.putExtra("task", task)
             intent.putExtra("priority", taskPriority)
+            intent.putExtra("priorityPosition", priorityPosition)
             this.startActivity(intent)
         }
 

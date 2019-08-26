@@ -49,6 +49,7 @@ class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         var currentDay = intent.extras?.getInt("currentDay")
         var currentMonth = intent.extras?.getInt("currentMonth")
         var currentYear = intent.extras?.getInt("currentYear")
+        var priorityPosition = intent.extras?.getInt("priorityPosition")
 
         // Create an ArrayAdapter
         val adapter = ArrayAdapter.createFromResource(this,
@@ -57,6 +58,8 @@ class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Apply the adapter to the spinner
         priority_spinner2.adapter = adapter
+        //setting the priority spinner value to the task priority
+        priority_spinner2.setSelection(priorityPosition!!)
 
         var startTimeBox = findViewById<Button>(R.id.task_start_time_text)
         startTimeBox.text = taskStartHour
