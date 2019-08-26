@@ -80,4 +80,7 @@ This xml file defines the string objects we can use to store info
         <item>4 (Priority Optional) </item>
         <item>5 (Priority meh) </item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
