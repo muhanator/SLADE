@@ -46,9 +46,10 @@ class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         val taskStartHour   = intent.extras?.getString("startTime")
         val taskEndHour = intent.extras?.getString("endTime")
         val dateString = intent.extras?.getString("date")
-        var currentDay = intent.extras?.getInt("currentDay")
-        var currentMonth = intent.extras?.getInt("currentMonth")
-        var currentYear = intent.extras?.getInt("currentYear")
+
+        var currentDay = task.getDay()
+        var currentMonth = task.getMonth()
+        var currentYear = task.getYear()
         var priorityPosition = intent.extras?.getInt("priorityPosition")
 
         // Create an ArrayAdapter
@@ -76,10 +77,8 @@ class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             val day = c.get(Calendar.DAY_OF_MONTH)
 
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-                currentDay = mDay
-                currentYear = mYear
-                currentMonth = mMonth + 1
                 editDate.setText("" + mDay + "/" + (mMonth + 1) + "/" + mYear)
+                TaskManager.updateTask(task, currentDay, currentMonth, currentYear, mDay, (mMonth+1), mYear)
             }, year, month, day)
             dpd.show()
         }
@@ -98,18 +97,6 @@ class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         finishButton.setOnClickListener(){
             var priority = priority_spinner2.selectedItem.toString()
             task.setPriority(priority)
-
-
-            var schedule = TaskManager.getSchedule(task.getDay(), task.getMonth(), task.getYear())
-            //remove task from schedule (have to do this because schedule still has a reference to the old task)
-            schedule.removeTask(task)
-
-            task.setDay(currentDay!!)
-            task.setYear(currentYear!!)
-            task.setMonth(currentMonth!!)
-
-            var newSchedule = TaskManager.getSchedule(currentDay!!, currentMonth!!, currentYear!!)
-            newSchedule.addTask(task)
 
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -171,10 +158,6 @@ class TaskEditActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 0 // Y offset
             )
         }
-    }
-
-    fun getPriority():String{
-        return priority_spinner.selectedItem.toString()
     }
 
     override fun onBackPressed() {

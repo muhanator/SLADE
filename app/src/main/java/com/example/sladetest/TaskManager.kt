@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.view.ViewGroup.LayoutParams
+import java.time.Month
 
 //This class is used to store all the information about each of the tasks
 //We only have 1 instance of it for the whole project, so that is why it is an "Object" and not a "Class"
@@ -59,6 +60,16 @@ object TaskManager{
     fun removeTask(task: Task, taskDay: Int, taskMonth: Int, taskYear: Int){
         val scheduleForTask = getSchedule(taskDay, taskMonth, taskYear)
         scheduleForTask.removeTask(task)
+    }
+
+    //Method that takes the Task and removes it from passed schedule and adds it to the new schedule
+    fun updateTask(task: Task, oldTaskDay: Int, oldTaskMonth: Int, oldTaskYear: Int, newTaskDay: Int, newTaskMonth: Int, newTaskYear: Int){
+        removeTask(task, oldTaskDay, oldTaskMonth, oldTaskYear)
+        val scheduleForUpdatedTask = getSchedule(newTaskDay, newTaskMonth, newTaskYear)
+        scheduleForUpdatedTask.addTask(task)
+        task.setDay(newTaskDay)
+        task.setMonth(newTaskMonth)
+        task.setYear(newTaskYear)
     }
 
     private fun createTaskIcon(task: Task, column: Int, nbOfColumns: Int, rowHeight: Int, description: String, frameLayout: FrameLayout, context: Context): Button{
