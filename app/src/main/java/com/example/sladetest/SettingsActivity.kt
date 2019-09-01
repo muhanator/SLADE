@@ -1,52 +1,71 @@
 package com.example.sladetest
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.CalendarView
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
+import android.view.MenuItem
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import android.view.Menu
+import android.content.Intent
+import android.view.View
+import android.widget.*
+import java.text.DateFormat
+import android.widget.TextView
+import java.util.*
+import android.widget.CompoundButton
+import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.EditText
+import android.view.LayoutInflater
 
-class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
+
+class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var currentTheme = SettingsData.colorMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //This function runs once upon creation of the activity
+
         super.onCreate(savedInstanceState)
 
         // Below, we initialize the theme, which will determine the colors of the app
         initializeTheme()
 
-        setContentView(R.layout.activity_calendar)
+        setContentView(R.layout.activity_settings)
 
+        
+        //Below, we initialize the Night Mode Switch
+        val nightModeSwitch = findViewById<Switch>(R.id.switch1)
 
-        //Below, we have access to inputs that occur on the calendar
-        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
+        if(SettingsData.colorMode == 1) nightModeSwitch.isChecked = true    // This line of code ie needed to remember the state of the swtich
 
-            intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("day", dayOfMonth)
-            intent.putExtra("month", month)
-            intent.putExtra("year", year)
-            startActivity(intent)
+        nightModeSwitch.setOnCheckedChangeListener{ buttonView, isChecked ->
 
-            //Toast.makeText(this@CalendarActivity, msg, Toast.LENGTH_SHORT).show()
+            if(isChecked){
+                SettingsData.colorMode = 1
+            }
+            else{
+                SettingsData.colorMode = 0
+            }
+
+            // Below, we initialize the theme, which will determine the colors of the app
+            initializeTheme()
+            recreate()          // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
         }
+
 
         //Below, we initialize the action toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.create_task_plus_button)
+
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -64,7 +83,10 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         navView.setNavigationItemSelectedListener(this)
 
+
+
     }
+
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -78,6 +100,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         //menuInflater.inflate(R.menu.main, menu)
+
         return true
     }
 
@@ -101,10 +124,11 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             }
             R.id.nav_calendar -> {
 
+                intent = Intent(this, CalendarActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_tools -> {
-                intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
+
             }
             R.id.nav_share -> {
 
@@ -128,6 +152,13 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
             recreate()
         }
+    }
+
+    private fun dpToPx(size : Double): Int{
+
+        val scale = resources.displayMetrics.density
+
+        return (size * scale + 0.5f).toInt()
     }
 
     private fun initializeTheme(){

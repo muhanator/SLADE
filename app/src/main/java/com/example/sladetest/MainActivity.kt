@@ -18,7 +18,11 @@ import android.view.*
 import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
+<<<<<<< HEAD
 import kotlinx.android.synthetic.main.home_content.*
+=======
+import androidx.constraintlayout.widget.ConstraintLayout
+>>>>>>> master
 import java.util.*
 import java.time.LocalDate
 import androidx.core.view.MotionEventCompat
@@ -33,10 +37,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var year : Int? = 0
     var month: Int? = 0
     var day  : Int? = 0
+    private var currentTheme = SettingsData.colorMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //This function runs once upon creation of the activity
         super.onCreate(savedInstanceState)
+
+        // Below, we initialize the theme, which will determine the colors of the app
+        initializeTheme()
+
         setContentView(R.layout.activity_main)
 
         // Initialize the task manager
@@ -100,7 +109,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
     }
 
-    fun initializeDate(){
+    override fun onResume() {
+
+        super.onResume()
+
+        val theme = SettingsData.colorMode
+
+        if(theme != currentTheme) {
+            // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
+            recreate()
+        }
+    }
+
+    private fun initializeDate(){
 
         //Below, we instantiate a calender to get the current date to display at the top of the page
         year  = intent.extras?.getInt("year")
@@ -166,11 +187,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_calendar -> {
                 intent = Intent(this, CalendarActivity::class.java)
                 startActivity(intent)
+
             }
             R.id.nav_tools -> {
-1
+                intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
+
 
             }
             R.id.nav_send -> {
@@ -187,6 +211,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val scale = resources.displayMetrics.density
 
         return (size * scale + 0.5f).toInt()
+    }
+
+    private fun initializeTheme(){
+
+        currentTheme = SettingsData.colorMode
+
+        // Below, we set the theme of the app depending on user settings
+        if(SettingsData.colorMode == 1) {
+            setTheme(R.style.DarkMode_AppTheme)
+        }
+        else{
+            setTheme(R.style.AppTheme)
+        }
     }
 
 

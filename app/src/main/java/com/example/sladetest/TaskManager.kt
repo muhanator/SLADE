@@ -14,6 +14,7 @@ import java.time.Month
 //You can think of it as a static class in Java
 object TaskManager{
 
+
     var density = 0.toFloat()
     val TABLE_BORDER_THICKNESS = 3
 

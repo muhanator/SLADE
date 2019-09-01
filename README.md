@@ -50,8 +50,9 @@ $ git rebase --continue
 TEAM MEMBERS:
 
 - Muhammad Saad Mujtaba, @muhanator
-- Michael Lee, @mlee97
+- Tyler Briggs, @BriggsTyler
 - Jeremy Davis, @jeremy-davis-mcgill
+- Michael Lee, @mlee97
 - Armando Mancino, @mandocino
 
 

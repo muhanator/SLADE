@@ -24,8 +24,14 @@ import kotlinx.android.synthetic.main.task_view_content.*
 //Used to show all the details of the task
 class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private var currentTheme = SettingsData.colorMode
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Below, we initialize the theme, which will determine the colors of the app
+        initializeTheme()
+
         setContentView(R.layout.activity_task_view)
 
         val nullableTask = intent.extras?.getSerializable("task") as? Task
@@ -188,6 +194,8 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
             R.id.nav_tools -> {
 
+                intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
 
@@ -199,6 +207,19 @@ class TaskViewActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun initializeTheme(){
+
+        currentTheme = SettingsData.colorMode
+
+        // Below, we set the theme of the app depending on user settings
+        if(SettingsData.colorMode == 1) {
+            setTheme(R.style.DarkMode_AppTheme)
+        }
+        else{
+            setTheme(R.style.AppTheme)
+        }
     }
 
 }

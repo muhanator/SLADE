@@ -3,17 +3,18 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="match_parent" android:id="@+id/linearLayout">
+                                                   android:layout_height="match_parent" android:id="@+id/linearLayout"
+                                                   android:background="?attr/backgroundColor">
 
     <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" app:srcCompat="@drawable/title_rect" android:id="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="70dp"
             android:contentDescription="@string/surrounds_the_date_on_the_today_page"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="105dp"
-            android:layout_marginStart="105dp" android:layout_marginEnd="106dp" android:layout_marginRight="106dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="10dp"
+    />
 
     <ScrollView
             android:layout_width="match_parent"

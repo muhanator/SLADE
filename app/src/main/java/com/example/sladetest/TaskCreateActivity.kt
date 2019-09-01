@@ -41,9 +41,14 @@ import android.view.View
 class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var formate = SimpleDateFormat("dd MMM, YYYY",Locale.US)
     var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
+    private var currentTheme = SettingsData.colorMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Below, we initialize the theme, which will determine the colors of the app
+        initializeTheme()
+
         setContentView(R.layout.task_creation_content) //setting the background to the task_creation.xml
 
         var currentHour = 0
@@ -162,6 +167,18 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
+    override fun onResume() {
+
+        super.onResume()
+
+        val theme = SettingsData.colorMode
+
+        if(theme != currentTheme) {
+            // Recreate needs to be invoked in order to recreate the activity. This way the new theme can be applied on the current screen.
+            recreate()
+        }
+    }
+
     fun getPriority():String{
         return priority_spinner.selectedItem.toString()
     }
@@ -207,6 +224,19 @@ class TaskCreateActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun initializeTheme(){
+
+        currentTheme = SettingsData.colorMode
+
+        // Below, we set the theme of the app depending on user settings
+        if(SettingsData.colorMode == 1) {
+            setTheme(R.style.DarkMode_AppTheme)
+        }
+        else{
+            setTheme(R.style.AppTheme)
+        }
     }
 
 }
