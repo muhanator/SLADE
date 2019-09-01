@@ -18,9 +18,17 @@ import android.view.*
 import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
+<<<<<<< HEAD
+import kotlinx.android.synthetic.main.home_content.*
+=======
 import androidx.constraintlayout.widget.ConstraintLayout
+>>>>>>> master
 import java.util.*
 import java.time.LocalDate
+import androidx.core.view.MotionEventCompat
+import androidx.fragment.app.*
+import android.content.*
+import androidx.viewpager.widget.ViewPager
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -42,18 +50,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Initialize the task manager
         TaskManager.init(resources.displayMetrics.density)
-
       
         // Initialize the date for the today view. If this is upon app launch, the date will be set to today's date.
         // If the activity is being called from CalendarActivity, it will use the given date which is not necessarily today's.
         initializeDate()
-
       
         //Below, we initialize the progress bar
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         progressBar.progress = 50
         progressBar.max      = 100
-
 
         //Below, we initialize the timetable time indicator (red line) so that it can move depending on the time of the day
         val timetableIndicatorMover = findViewById<ImageView>(R.id.timetable_indicator_mover)
@@ -64,11 +69,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         timetableIndicatorMover.layoutParams.height = dpHeightInPx
         timetableIndicatorMover.visibility          = View.INVISIBLE
 
-
         //Below, we update the schedule view with all of the tasks for the given day
         val frameLayout = findViewById<FrameLayout>(R.id.task_icon_container)
         val timeTableRow = findViewById<TableRow>(R.id.tableRow_12am)
-
 
         val content = findViewById<View>(android.R.id.content)
         content.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -77,10 +80,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 //layout pass, which can get you into infinite loops if you ever
                 //modify the layout from within this method.
                 content.viewTreeObserver.removeGlobalOnLayoutListener(this)
+
                 //Now you can get the width and height from content
-
                 TaskManager.updateTodayView(year!!, month!!, day!!, frameLayout, timeTableRow.measuredHeight, this@MainActivity)
-
             }
         })
 
@@ -105,7 +107,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-
     }
 
     override fun onResume() {

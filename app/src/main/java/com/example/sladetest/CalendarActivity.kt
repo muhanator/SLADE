@@ -39,9 +39,6 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             intent.putExtra("year", year)
             startActivity(intent)
 
-
-
-            //val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
             //Toast.makeText(this@CalendarActivity, msg, Toast.LENGTH_SHORT).show()
         }
 

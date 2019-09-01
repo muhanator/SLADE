@@ -1,6 +1,8 @@
 package com.example.sladetest
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,8 @@ class EditTaskActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
+        setContentView(R.layout.task_edit_content)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

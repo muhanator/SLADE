@@ -16,11 +16,12 @@ class Schedule(givenDay: Int, givenMonth: Int, givenYear: Int) {
     }
 
     fun addTask(task: Task){
-
         tasks.add(task)
     }
+    fun removeTask(task: Task){
+        tasks.remove(task)
+    }
     fun getScheduleTasks(): MutableList<Task>{
-
         return tasks
     }
 }
