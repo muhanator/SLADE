@@ -18,11 +18,8 @@ import android.view.*
 import android.widget.*
 import java.text.DateFormat
 import android.widget.TextView
-<<<<<<< HEAD
 import kotlinx.android.synthetic.main.home_content.*
-=======
 import androidx.constraintlayout.widget.ConstraintLayout
->>>>>>> master
 import java.util.*
 import java.time.LocalDate
 import androidx.core.view.MotionEventCompat
